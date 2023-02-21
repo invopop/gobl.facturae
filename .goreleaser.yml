@@ -1,0 +1,37 @@
+before:
+  hooks:
+    - go mod download
+builds:
+  - id: gobl.facturae
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    main: ./cmd/gobl.facturae
+    binary: gobl.facturae
+
+archives:
+  - id: gobl.facturae
+    builds:
+      - gobl.facturae
+    format: tar.gz
+    name_template: "gobl.facturae_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    wrap_in_directory: true
+
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .Tag }}"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+release:
+  github:
+    owner: invopop
+    name: gobl.facturae
+  prerelease: auto

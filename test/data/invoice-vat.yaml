@@ -1,0 +1,80 @@
+head:
+  uuid: "679f2f25-7483-11ec-9722-7ea2cb436ff6"
+
+doc:
+  $schema: "https://gobl.org/draft-0/bill/invoice"
+  code: "TEST01001F"
+  currency: EUR
+  issue_date: "2021-12-08"
+
+  supplier:
+    # Sample data from https://generadordni.es/#profiles
+    tax_id:
+      country: "ES"
+      code: "B23103039"
+    name: "Hypeprop Sl"
+    alias: "Hypeprop"
+    people:
+      - name:
+          given: "Paloma"
+          surname: "Araujo"
+    addresses:
+      - num: "74"
+        street: "Campo Real"
+        locality: "Torrejón De La Calzada"
+        region: "Madrid"
+        code: "28023"
+        country: "ES"
+    emails:
+      - addr: "rxazy27xfc@iname.com"
+    telephones:
+      - label: "office"
+        num: "+34910730028"
+
+  customer:
+    tax_id:
+      country: "ES"
+      code: "B77436020"
+    name: "Moniward Sl"
+    addresses:
+      - num: "35"
+        street: "Plaza Horno"
+        locality: "Nombela"
+        region: "Toledo"
+        code: "45083"
+        country: "ES"
+    emails:
+      - addr: "bfn25xf3p@lycos.co.uk"
+
+  lines:
+    - quantity: "20"
+      item:
+        name: "Operations and development - day rate"
+        price: "200.00"
+      taxes:
+        - cat: "VAT"
+          rate: "standard"
+    - quantity: "2"
+      item:
+        name: "Additional Overtime"
+        price: "101.00"
+      taxes:
+        - cat: "VAT"
+          rate: "standard"
+
+  notes:
+    - key: general
+      text: "Thank you for your custom!"
+
+  payment:
+    terms:
+      key: "due-date"
+      due_dates:
+        - date: "2021-12-30"
+          percent: "100%"
+      notes: "Some kind of payment term note"
+    instructions:
+      key: "credit-transfer"
+      credit_transfer:
+        - iban: "ES25 0188 2570 7185 4470 4761"
+          name: "Bankrandom"

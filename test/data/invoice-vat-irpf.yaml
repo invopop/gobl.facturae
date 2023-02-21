@@ -1,0 +1,89 @@
+head:
+  uuid: "679f2f25-7483-11ec-9722-7ea2cb436ff6"
+
+doc:
+  $schema: "https://gobl.org/draft-0/bill/invoice"
+  code: "TEST01002F"
+  currency: EUR
+  issue_date: "2021-12-08"
+  supplier:
+    # Sample data from https://generadordni.es/#profiles
+    tax_id:
+      country: "ES"
+      code: "37221735F"
+    name: "Maria Serivces"
+    people:
+      - name:
+          given: "Maria Remedios"
+          surname: "Sanchez"
+          surname2: "Nuñez"
+    addresses:
+      - num: "74"
+        street: "Campo Real"
+        locality: "Torrejón De La Calzada"
+        region: "Madrid"
+        code: "28023"
+        country: "ES"
+    emails:
+      - addr: "msohrjnb3@caramail.com"
+    telephones:
+      - label: "mobile"
+        num: "+34612123123"
+
+  customer:
+    tax_id:
+      country: "ES"
+      code: "B77436020"
+    name: "Moniward Sl"
+    addresses:
+      - num: "35"
+        street: "Plaza Horno"
+        locality: "Nombela"
+        region: "Toledo"
+        code: "45083"
+        country: "ES"
+    emails:
+      - addr: "bfn25xf3p@lycos.co.uk"
+
+  lines:
+    - quantity: "20"
+      item:
+        name: "Operations and development - day rate"
+        price: "200.00"
+      discounts:
+        - percent: "5.0%"
+          reason: "just because"
+      taxes:
+        - cat: VAT
+          rate: standard
+        - cat: IRPF
+          rate: pro
+    - quantity: "2"
+      item:
+        name: "Additional Overtime"
+        price: "101.00"
+      taxes:
+        - cat: "VAT"
+          rate: "standard"
+        - cat: "IRPF"
+          rate: "pro"
+    - quantity: "1"
+      item:
+        name: "Extra food costs"
+        price: "35.00"
+      taxes:
+        - cat: "VAT"
+          rate: reduced
+
+  outlays:
+    - desc: "A product we had to pay for"
+      amount: "200.00"
+
+  payment:
+    terms:
+      key: "instant"
+    instructions:
+      key: "credit-transfer"
+      credit_transfer:
+        - iban: "ES06 0128 0011 3901 0008 1391"
+          name: "Bankinter"
