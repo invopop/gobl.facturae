@@ -1,0 +1,174 @@
+{
+	"$schema": "https://gobl.org/draft-0/envelope",
+	"head": {
+		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
+		"dig": {
+			"alg": "sha256",
+			"val": "5d213807dc17206c821118e285f042ba6b716418f393e6d8c80d97966fae39cf"
+		}
+	},
+	"doc": {
+		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"code": "TEST01001F",
+		"currency": "EUR",
+		"issue_date": "2021-12-08",
+		"supplier": {
+			"tax_id": {
+				"country": "ES",
+				"code": "B23103039"
+			},
+			"name": "Hypeprop Sl",
+			"alias": "Hypeprop",
+			"people": [
+				{
+					"name": {
+						"given": "Paloma",
+						"surname": "Araujo"
+					}
+				}
+			],
+			"addresses": [
+				{
+					"num": "74",
+					"street": "Campo Real",
+					"locality": "Torrejón De La Calzada",
+					"region": "Madrid",
+					"code": "28023",
+					"country": "ES"
+				}
+			],
+			"emails": [
+				{
+					"addr": "rxazy27xfc@iname.com"
+				}
+			],
+			"telephones": [
+				{
+					"label": "office",
+					"num": "+34910730028"
+				}
+			]
+		},
+		"customer": {
+			"tax_id": {
+				"country": "ES",
+				"code": "B77436020"
+			},
+			"name": "Moniward Sl",
+			"addresses": [
+				{
+					"num": "35",
+					"street": "Plaza Horno",
+					"locality": "Nombela",
+					"region": "Toledo",
+					"code": "45083",
+					"country": "ES"
+				}
+			],
+			"emails": [
+				{
+					"addr": "bfn25xf3p@lycos.co.uk"
+				}
+			]
+		},
+		"lines": [
+			{
+				"i": 1,
+				"quantity": "20",
+				"item": {
+					"name": "Delivery",
+					"price": "50.00"
+				},
+				"sum": "1000.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"rate": "standard+eqs",
+						"percent": "21.0%",
+						"surcharge": "5.2%"
+					}
+				],
+				"total": "1000.00"
+			},
+			{
+				"i": 2,
+				"quantity": "50",
+				"item": {
+					"name": "Branded Mug",
+					"price": "12.00"
+				},
+				"sum": "600.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"rate": "standard+eqs",
+						"percent": "21.0%",
+						"surcharge": "5.2%"
+					}
+				],
+				"total": "600.00"
+			}
+		],
+		"payment": {
+			"terms": {
+				"key": "due-date",
+				"due_dates": [
+					{
+						"date": "2021-12-30",
+						"amount": "2019.20",
+						"percent": "100%"
+					}
+				],
+				"notes": "Some kind of payment term note"
+			},
+			"instructions": {
+				"key": "credit-transfer",
+				"credit_transfer": [
+					{
+						"iban": "ES06 0128 0011 3901 0008 1391",
+						"name": "Bankinter"
+					}
+				]
+			}
+		},
+		"totals": {
+			"sum": "1600.00",
+			"total": "1600.00",
+			"taxes": {
+				"categories": [
+					{
+						"code": "VAT",
+						"rates": [
+							{
+								"key": "standard+eqs",
+								"base": "1600.00",
+								"percent": "21.0%",
+								"amount": "336.00",
+								"surcharge": {
+									"percent": "5.2%",
+									"amount": "83.20"
+								}
+							}
+						],
+						"base": "1600.00",
+						"amount": "336.00",
+						"surcharge": "83.20"
+					}
+				],
+				"sum": "419.20"
+			},
+			"tax": "419.20",
+			"total_with_tax": "2019.20",
+			"payable": "2019.20"
+		},
+		"notes": [
+			{
+				"code": "general",
+				"text": "Thank you for your custom!"
+			}
+		]
+	},
+	"sigs": [
+		"eyJhbGciOiJFUzI1NiIsImtpZCI6IjgxNzQ2NzM1LTkzNWYtNDVlOC1iOTU4LWI5Yzg2ZTE2ZmZiZiJ9.eyJ1dWlkIjoiNjc5ZjJmMjUtNzQ4My0xMWVjLTk3MjItN2VhMmNiNDM2ZmY2IiwiZGlnIjp7ImFsZyI6InNoYTI1NiIsInZhbCI6IjVkMjEzODA3ZGMxNzIwNmM4MjExMThlMjg1ZjA0MmJhNmI3MTY0MThmMzkzZTZkOGM4MGQ5Nzk2NmZhZTM5Y2YifX0.wML3kQnQA7iDROITimDHup1e0xHnFRtgKA34ljuE_WUD5Ho3cauHVG7mD6g7AE-7T4_IRaBFDeEMfMO-Pq-fuA"
+	]
+}

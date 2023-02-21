@@ -1,0 +1,219 @@
+{
+	"$schema": "https://gobl.org/draft-0/envelope",
+	"head": {
+		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
+		"dig": {
+			"alg": "sha256",
+			"val": "60edccab60eaedc2f5292ac79aa4f11d7d6a6ee08b89e938fddabc0dae6e7e05"
+		}
+	},
+	"doc": {
+		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"code": "TEST01002F",
+		"currency": "EUR",
+		"tax": {
+			"prices_include": "VAT"
+		},
+		"issue_date": "2021-12-08",
+		"supplier": {
+			"tax_id": {
+				"country": "ES",
+				"code": "B23103039"
+			},
+			"name": "Hypeprop Sl",
+			"alias": "Hypeprop",
+			"people": [
+				{
+					"name": {
+						"given": "Paloma",
+						"surname": "Araujo"
+					}
+				}
+			],
+			"addresses": [
+				{
+					"num": "74",
+					"street": "Campo Real",
+					"locality": "Torrejón De La Calzada",
+					"region": "Madrid",
+					"code": "28023",
+					"country": "ES"
+				}
+			],
+			"emails": [
+				{
+					"addr": "rxazy27xfc@iname.com"
+				}
+			],
+			"telephones": [
+				{
+					"label": "office",
+					"num": "+34910730028"
+				}
+			]
+		},
+		"customer": {
+			"tax_id": {
+				"country": "ES",
+				"code": "B77436020"
+			},
+			"name": "Moniward Sl",
+			"addresses": [
+				{
+					"num": "35",
+					"street": "Plaza Horno",
+					"locality": "Nombela",
+					"region": "Toledo",
+					"code": "45083",
+					"country": "ES"
+				}
+			],
+			"emails": [
+				{
+					"addr": "bfn25xf3p@lycos.co.uk"
+				}
+			]
+		},
+		"lines": [
+			{
+				"i": 1,
+				"quantity": "20",
+				"item": {
+					"name": "Operations and development - day rate",
+					"price": "200.00"
+				},
+				"sum": "4000.00",
+				"discounts": [
+					{
+						"percent": "5.0%",
+						"amount": "200.00",
+						"reason": "just because"
+					}
+				],
+				"taxes": [
+					{
+						"cat": "VAT",
+						"rate": "standard",
+						"percent": "21.0%"
+					},
+					{
+						"cat": "IRPF",
+						"rate": "pro",
+						"percent": "15.0%"
+					}
+				],
+				"total": "3800.00"
+			},
+			{
+				"i": 2,
+				"quantity": "2",
+				"item": {
+					"name": "Additional Overtime",
+					"price": "101.00"
+				},
+				"sum": "202.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"rate": "standard",
+						"percent": "21.0%"
+					},
+					{
+						"cat": "IRPF",
+						"rate": "pro",
+						"percent": "15.0%"
+					}
+				],
+				"total": "202.00"
+			},
+			{
+				"i": 3,
+				"quantity": "1",
+				"item": {
+					"name": "Extra food costs",
+					"price": "35.00"
+				},
+				"sum": "35.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"rate": "reduced",
+						"percent": "10.0%"
+					}
+				],
+				"total": "35.00"
+			}
+		],
+		"outlays": [
+			{
+				"i": 1,
+				"desc": "A product we had to pay for",
+				"amount": "200.00"
+			}
+		],
+		"payment": {
+			"terms": {
+				"key": "instant"
+			},
+			"instructions": {
+				"key": "credit-transfer",
+				"credit_transfer": [
+					{
+						"iban": "ES06 0128 0011 3901 0008 1391",
+						"name": "Bankinter"
+					}
+				]
+			}
+		},
+		"totals": {
+			"sum": "4037.00",
+			"tax_included": "697.74",
+			"total": "3339.26",
+			"taxes": {
+				"categories": [
+					{
+						"code": "VAT",
+						"rates": [
+							{
+								"key": "standard",
+								"base": "3307.44",
+								"percent": "21.0%",
+								"amount": "694.56"
+							},
+							{
+								"key": "reduced",
+								"base": "31.82",
+								"percent": "10.0%",
+								"amount": "3.18"
+							}
+						],
+						"base": "3339.26",
+						"amount": "697.74"
+					},
+					{
+						"code": "IRPF",
+						"retained": true,
+						"rates": [
+							{
+								"key": "pro",
+								"base": "3307.44",
+								"percent": "15.0%",
+								"amount": "496.12"
+							}
+						],
+						"base": "3307.44",
+						"amount": "496.12"
+					}
+				],
+				"sum": "201.62"
+			},
+			"tax": "201.62",
+			"total_with_tax": "3540.88",
+			"outlays": "200.00",
+			"payable": "3740.88"
+		}
+	},
+	"sigs": [
+		"eyJhbGciOiJFUzI1NiIsImtpZCI6IjgxNzQ2NzM1LTkzNWYtNDVlOC1iOTU4LWI5Yzg2ZTE2ZmZiZiJ9.eyJ1dWlkIjoiNjc5ZjJmMjUtNzQ4My0xMWVjLTk3MjItN2VhMmNiNDM2ZmY2IiwiZGlnIjp7ImFsZyI6InNoYTI1NiIsInZhbCI6IjYwZWRjY2FiNjBlYWVkYzJmNTI5MmFjNzlhYTRmMTFkN2Q2YTZlZTA4Yjg5ZTkzOGZkZGFiYzBkYWU2ZTdlMDUifX0.sHUdfWDuji82_6gscZmhpYDQrGGlCDcHRQlDQr8oNocZjxHD2NJBHNbEZHf2vjzJr6YXrdY6GYbqG7tJ6yiZCA"
+	]
+}

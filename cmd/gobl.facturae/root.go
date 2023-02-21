@@ -8,8 +8,6 @@ import (
 )
 
 type rootOpts struct {
-	indent              bool // when true, indent output, mainly for testing
-	overwriteOutputFile bool
 }
 
 func root() *rootOpts {
