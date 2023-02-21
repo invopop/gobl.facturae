@@ -2,7 +2,7 @@
 
 Convert GOBL documents into the Spain's FacturaE format.
 
-Copyright [Invopop Ltd.](https://invopop.com) 2023. Released publicly under the [GNU Affero General Public License v3.0](LICENSE). For commercial licenses please contact the [dev team at invopop](mailto:dev@invopop.com). In order to accept contributions to this library, at this time we will require acceptance of transferring copyright to Invopop Ltd.
+Copyright [Invopop Ltd.](https://invopop.com) 2023. Released publicly under the [GNU Affero General Public License v3.0](LICENSE). For commercial licenses please contact the [dev team at invopop](mailto:dev@invopop.com). In order to accept contributions to this library we will require transferring copyrights to Invopop Ltd.
 
 [![Lint](https://github.com/invopop/gobl.facturae/actions/workflows/lint.yaml/badge.svg)](https://github.com/invopop/gobl.facturae/actions/workflows/lint.yaml)
 [![Test Go](https://github.com/invopop/gobl.facturae/actions/workflows/test.yaml/badge.svg)](https://github.com/invopop/gobl.facturae/actions/workflows/test.yaml)
@@ -110,4 +110,4 @@ The second will generate the FacturaE XML documents from the GOBL sources, using
 mage -v convertXML
 ```
 
-Sample data sources are contained in the `/test/data` directory. YAML documents are stored in the Git repository, but JSON and XML must be generated using the above commands.
+Sample data sources are contained in the `/test/data` directory. YAML and JSON (for tests) documents are stored in the Git repository, but the XML must be generated using the above commands.
