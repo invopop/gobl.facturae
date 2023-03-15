@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/invopop/gobl v0.37.2
+	github.com/invopop/gobl v0.38.0
 	github.com/invopop/xmldsig v0.6.1
 	github.com/magefile/mage v1.14.0
 	github.com/spf13/cobra v1.6.1
@@ -15,14 +15,14 @@ require (
 require (
 	cloud.google.com/go v0.99.0 // indirect
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
-	github.com/asaskevich/govalidator v0.0.0-20200108200545-475eaeb16496 // indirect
+	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/beevik/etree v1.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/go-ozzo/ozzo-validation/v4 v4.3.0 // indirect
 	github.com/google/uuid v1.1.2 // indirect
 	github.com/iancoleman/orderedmap v0.0.0-20190318233801-ac98e3ecb4b0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/invopop/jsonschema v0.7.0 // indirect
+	github.com/invopop/validation v0.3.0 // indirect
 	github.com/otiai10/copy v1.7.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -33,3 +33,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	software.sslmate.com/src/go-pkcs12 v0.2.0 // indirect
 )
+
+// replace github.com/invopop/gobl => ../gobl

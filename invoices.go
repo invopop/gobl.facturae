@@ -4,7 +4,6 @@ import (
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/gobl/cal"
 	"github.com/invopop/gobl/cbc"
-	"github.com/invopop/gobl/i18n"
 	"github.com/invopop/gobl/regimes/es"
 	"github.com/invopop/gobl/tax"
 )
@@ -35,22 +34,6 @@ type InvoiceHeader struct {
 	InvoiceDocumentType string
 	InvoiceClass        string
 	Corrective          *Corrective `xml:",omitempty"`
-}
-
-// Corrective is used to represent the details of a previous invoice that
-// this one serves to modify or replace.
-// Details here are a bit sketchy as in practical usage, most companies
-// don't demand this level of detail.
-type Corrective struct {
-	InvoiceNumber               string `xml:",omitempty"`
-	InvoiceSeriesCode           string `xml:",omitempty"`
-	ReasonCode                  string
-	ReasonDescription           string
-	TaxPeriod                   *PeriodDates
-	CorrectionMethod            string
-	CorrectionMethodDescription string
-	AdditionalReasonDescription string `xml:",omitempty"`
-	InvoiceIssueDate            string `xml:",omitempty"`
 }
 
 // PeriodDates is used in corrective tax periods to define a date
@@ -164,41 +147,14 @@ func newInvoiceHeader(inv *bill.Invoice) *InvoiceHeader {
 		InvoiceSeriesCode: inv.Series,
 	}
 
-	switch inv.Type {
-	case bill.InvoiceTypeSimplified:
-		h.InvoiceDocumentType = "FA" // Factura simplificada
-	default:
-		h.InvoiceDocumentType = "FC" // Factura completa u ordinaria
-	}
+	ss := inv.ScenarioSummary()
 
-	if len(inv.Preceding) == 0 {
-		h.InvoiceClass = "OO" // Original
-	} else {
-		// NOTE: We do not yet support "recapulatative" or grouped
-		// invoices (recapitulativas)
-		h.InvoiceClass = "OR" // Original Rectificativa
-		p := inv.Preceding[0]
-		h.Corrective = &Corrective{
-			InvoiceNumber:               p.Code,
-			InvoiceSeriesCode:           p.Series,
-			InvoiceIssueDate:            p.IssueDate.String(),
-			TaxPeriod:                   newPeriodDates(p.Period),
-			AdditionalReasonDescription: p.Notes,
-		}
+	h.InvoiceDocumentType = ss.Meta[es.KeyFacturaEInvoiceDocumentType]
+	h.InvoiceClass = ss.Meta[es.KeyFacturaEInvoiceClass]
 
-		// find the reason
-		if len(p.Corrections) > 0 {
-			if r, ok := es.CorrectionReasonMap[p.Corrections[0]]; ok {
-				h.Corrective.ReasonCode = r.Code
-				h.Corrective.ReasonDescription = r.Desc[i18n.ES]
-			}
-		}
-
-		// find the method
-		if m, ok := es.CorrectionMethodMap[p.CorrectionMethod]; ok {
-			h.Corrective.CorrectionMethod = m.Code
-			h.Corrective.CorrectionMethodDescription = m.Desc[i18n.ES]
-		}
+	// Only one preceding document currently supported
+	if len(inv.Preceding) > 0 {
+		h.Corrective = newCorrective(inv)
 	}
 
 	return h

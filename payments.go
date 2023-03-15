@@ -2,6 +2,7 @@ package facturae
 
 import (
 	"github.com/invopop/gobl/bill"
+	"github.com/invopop/gobl/cbc"
 	"github.com/invopop/gobl/pay"
 )
 
@@ -31,7 +32,7 @@ type BankAccount struct {
 	BIC                   string   `xml:",omitempty"`
 }
 
-var facturaePaymentMethodCodes = map[pay.MethodKey]string{
+var facturaePaymentMethodCodes = map[cbc.Key]string{
 	pay.MethodKeyCash:           "01",
 	pay.MethodKeyDirectDebit:    "02",
 	pay.MethodKeyCreditTransfer: "04",

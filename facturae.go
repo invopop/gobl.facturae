@@ -10,12 +10,18 @@ import (
 
 	"github.com/invopop/gobl"
 	"github.com/invopop/gobl/bill"
+	"github.com/invopop/gobl/regimes/es"
 	"github.com/invopop/xmldsig"
 )
 
 // Namespaces used for FacturaE. DSig stuff is handled in the signatures.
 const (
 	NamespaceFacturaE = "http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml"
+)
+
+var (
+	// our global tax regime
+	regime = es.New()
 )
 
 var (
