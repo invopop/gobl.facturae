@@ -38,7 +38,7 @@ func newCorrective(inv *bill.Invoice) *Corrective {
 	if len(p.Corrections) > 0 {
 		kd := correctionKeyDefinition(p.Corrections[0])
 		if kd != nil {
-			c.ReasonCode = kd.Meta[es.KeyFacturaE]
+			c.ReasonCode = kd.Codes[es.KeyFacturaE].String()
 			c.ReasonDescription = kd.Desc[i18n.ES]
 		}
 	}
@@ -46,7 +46,7 @@ func newCorrective(inv *bill.Invoice) *Corrective {
 	// find the method
 	kd := correctionMethodKeyDefinition(p.CorrectionMethod)
 	if kd != nil {
-		c.CorrectionMethod = kd.Meta[es.KeyFacturaE]
+		c.CorrectionMethod = kd.Codes[es.KeyFacturaE].String()
 		c.CorrectionMethodDescription = kd.Desc[i18n.ES]
 	}
 

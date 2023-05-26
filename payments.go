@@ -32,12 +32,13 @@ type BankAccount struct {
 	BIC                   string   `xml:",omitempty"`
 }
 
+// TODO: move this to the GOBL project directly.
 var facturaePaymentMethodCodes = map[cbc.Key]string{
-	pay.MethodKeyCash:           "01",
-	pay.MethodKeyDirectDebit:    "02",
-	pay.MethodKeyCreditTransfer: "04",
-	pay.MethodKeyCard:           "19",
-	pay.MethodKeyOnline:         "13",
+	pay.MeansKeyCash:           "01",
+	pay.MeansKeyDirectDebit:    "02",
+	pay.MeansKeyCreditTransfer: "04",
+	pay.MeansKeyCard:           "19",
+	pay.MeansKeyOnline:         "13",
 }
 
 func newPaymentDetails(paymentInfo *bill.Payment) *PaymentDetails {
@@ -63,18 +64,18 @@ func newPaymentDetails(paymentInfo *bill.Payment) *PaymentDetails {
 			CollectionAdditionalInformation: mergeNotes(paymentInfo.Terms.Notes, installment.Notes),
 		}
 
-		if instructions.Key == pay.MethodKeyCreditTransfer {
+		if instructions.Key == pay.MeansKeyCreditTransfer {
 			if len(instructions.CreditTransfer) > 0 {
 				xmlInstallment.AccountToBeCredited = newCreditBankAccount(instructions.CreditTransfer[0])
 			}
 		}
 
-		if instructions.Key == pay.MethodKeyDirectDebit {
+		if instructions.Key == pay.MeansKeyDirectDebit {
 			xmlInstallment.AccountToBeDebited = newDebitBankAccount(instructions.DirectDebit)
 			xmlInstallment.DebitReconciliationReference = instructions.DirectDebit.Ref
 		}
 
-		if instructions.Key == pay.MethodKeyOnline {
+		if instructions.Key == pay.MeansKeyOnline {
 			if len(instructions.Online) > 0 {
 				if len(xmlInstallment.CollectionAdditionalInformation) > 0 {
 					xmlInstallment.CollectionAdditionalInformation += "\n"

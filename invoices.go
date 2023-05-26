@@ -149,8 +149,8 @@ func newInvoiceHeader(inv *bill.Invoice) *InvoiceHeader {
 
 	ss := inv.ScenarioSummary()
 
-	h.InvoiceDocumentType = ss.Meta[es.KeyFacturaEInvoiceDocumentType]
-	h.InvoiceClass = ss.Meta[es.KeyFacturaEInvoiceClass]
+	h.InvoiceDocumentType = ss.Codes[es.KeyFacturaEInvoiceDocumentType].String()
+	h.InvoiceClass = ss.Codes[es.KeyFacturaEInvoiceClass].String()
 
 	// Only one preceding document currently supported
 	if len(inv.Preceding) > 0 {
