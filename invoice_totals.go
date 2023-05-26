@@ -25,7 +25,7 @@ type InvoiceTotals struct {
 	TotalOutstandingAmount      string                // InvoiceTotal - (Total subvenciones + TotalPaymentsOnAccount)
 	TotalPaymentsOnAccount      string                `xml:",omitempty"`
 	TotalExecutableAmount       string
-	TotalReimbursableExpenses   string `xml:",omitmpty"`
+	TotalReimbursableExpenses   string `xml:",omitempty"`
 }
 
 // Subsidies is currently a placeholder, as we don't use it yet.
