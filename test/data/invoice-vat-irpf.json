@@ -4,7 +4,7 @@
 		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
 		"dig": {
 			"alg": "sha256",
-			"val": "e219d9edb92d7292e2e00b4b98346b5e7eb42cd472683629083abbb7f3a64108"
+			"val": "389aba9a21c339b86a21f21544a20d47b2b53409a190aae49d5d90e0146998f9"
 		}
 	},
 	"doc": {
@@ -184,7 +184,6 @@
 								"amount": "3.50"
 							}
 						],
-						"base": "4037.00",
 						"amount": "843.92"
 					},
 					{
@@ -198,7 +197,6 @@
 								"amount": "600.30"
 							}
 						],
-						"base": "4002.00",
 						"amount": "600.30"
 					}
 				],
@@ -211,6 +209,6 @@
 		}
 	},
 	"sigs": [
-		"eyJhbGciOiJFUzI1NiIsImtpZCI6IjkyZjIyYjAzLTA4NTQtNGRkNS05ZWJhLTg1Nzg0MTE2YWI1ZCJ9.eyJ1dWlkIjoiNjc5ZjJmMjUtNzQ4My0xMWVjLTk3MjItN2VhMmNiNDM2ZmY2IiwiZGlnIjp7ImFsZyI6InNoYTI1NiIsInZhbCI6ImUyMTlkOWVkYjkyZDcyOTJlMmUwMGI0Yjk4MzQ2YjVlN2ViNDJjZDQ3MjY4MzYyOTA4M2FiYmI3ZjNhNjQxMDgifX0.03T3yZlGhSMrf5x2kxpaLdyPphnFOM5pyKlMpxQj1kwXNXu9HYXJ_qXeNVqcQn1VMlofwjFeM9cfC1yB58LWrQ"
+		"eyJhbGciOiJFUzI1NiIsImtpZCI6Ijg1NDgzYmE5LTg5OTUtNGY3NS05MDUzLWUzMzNkM2FjY2Q2ZSJ9.eyJ1dWlkIjoiNjc5ZjJmMjUtNzQ4My0xMWVjLTk3MjItN2VhMmNiNDM2ZmY2IiwiZGlnIjp7ImFsZyI6InNoYTI1NiIsInZhbCI6IjM4OWFiYTlhMjFjMzM5Yjg2YTIxZjIxNTQ0YTIwZDQ3YjJiNTM0MDlhMTkwYWFlNDlkNWQ5MGUwMTQ2OTk4ZjkifX0.4c6wXahFsUwv2qKAsK3BsHJDG52UTqTr8iAb2jGf8Qmeuxq2Q-Lx6ru9hfCrCXx19BoyxfJJ-XNrM9NOvHpwwg"
 	]
 }
