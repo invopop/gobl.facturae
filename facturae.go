@@ -19,6 +19,13 @@ const (
 	NamespaceFacturaE = "http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml"
 )
 
+// XAdES Signer Roles used for FacturaE
+const (
+	XAdESSupplier   xmldsig.XAdESSignerRole = "supplier"
+	XAdESCustomer   xmldsig.XAdESSignerRole = "customer"
+	XAdESThirdParty xmldsig.XAdESSignerRole = "third party"
+)
+
 var (
 	// our global tax regime
 	regime = es.New()
@@ -26,7 +33,7 @@ var (
 
 var (
 	xadesConfig = &xmldsig.XAdESConfig{
-		Role:        xmldsig.XAdESThirdParty,
+		Role:        XAdESThirdParty,
 		Description: "Factura Electrónica",
 		Policy: &xmldsig.XAdESPolicyConfig{
 			URL:         "http://www.facturae.es/politica_de_firma_formato_facturae/politica_de_firma_formato_facturae_v3_1.pdf",
