@@ -119,7 +119,11 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 	}
 
 	// Make sure we're dealing with raw data
-	invoice = invoice.RemoveIncludedTaxes(2)
+	var err error
+	invoice, err = invoice.RemoveIncludedTaxes()
+	if err != nil {
+		return nil, fmt.Errorf("removing taxes: %w", err)
+	}
 
 	// Basic document headers
 	d := &Document{

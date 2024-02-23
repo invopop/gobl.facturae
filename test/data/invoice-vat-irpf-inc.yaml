@@ -1,6 +1,6 @@
+$schema: "https://gobl.org/draft-0/envelope"
 head:
   uuid: "679f2f25-7483-11ec-9722-7ea2cb436ff6"
-
 doc:
   $schema: "https://gobl.org/draft-0/bill/invoice"
   code: "TEST01002F"

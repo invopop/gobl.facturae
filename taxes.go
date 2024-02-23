@@ -2,12 +2,9 @@ package facturae
 
 import (
 	"github.com/invopop/gobl/cbc"
-	"github.com/invopop/gobl/regimes/common"
 	"github.com/invopop/gobl/regimes/es"
+	"github.com/invopop/gobl/tax"
 )
-
-// FIXME: [JUANJO] we are missing things like regimen especial
-// and recargo de equivalencia
 
 // TaxSummary contains a list with the info of each tax type
 type TaxSummary struct {
@@ -25,8 +22,8 @@ type Tax struct {
 }
 
 var categoryTaxCodeMap = map[cbc.Code]string{
-	common.TaxCategoryVAT: "01",
-	es.TaxCategoryIPSI:    "02", // Ceuta, Melilla
-	es.TaxCategoryIGIC:    "03", // Canary Islands
-	es.TaxCategoryIRPF:    "04",
+	tax.CategoryVAT:    "01",
+	es.TaxCategoryIPSI: "02", // Ceuta, Melilla
+	es.TaxCategoryIGIC: "03", // Canary Islands
+	es.TaxCategoryIRPF: "04",
 }
