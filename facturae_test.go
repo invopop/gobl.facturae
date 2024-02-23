@@ -2,6 +2,7 @@ package facturae_test
 
 import (
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -25,7 +26,7 @@ func TestLoadDocument(t *testing.T) {
 	})
 
 	t.Run("should return a document", func(t *testing.T) {
-		envelopeReader, err := os.Open(test.GetDataPath() + "invoice-vat.json")
+		envelopeReader, err := os.Open(filepath.Join(test.GetDataPath(), "invoice-vat.json"))
 		require.NoError(t, err)
 		doc, err := facturae.LoadGOBL(envelopeReader)
 		require.NoError(t, err)

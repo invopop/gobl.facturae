@@ -2,6 +2,7 @@ package facturae
 
 import (
 	"github.com/invopop/gobl/bill"
+	"github.com/invopop/gobl/cal"
 	"github.com/invopop/gobl/cbc"
 	"github.com/invopop/gobl/i18n"
 	"github.com/invopop/gobl/regimes/es"
@@ -73,9 +74,19 @@ func newCorrective(inv *bill.Invoice) *Corrective {
 		InvoiceNumber:               p.Code,
 		InvoiceSeriesCode:           p.Series,
 		InvoiceIssueDate:            p.IssueDate.String(),
-		TaxPeriod:                   newPeriodDates(p.Period), // Todo - autocalculate
 		AdditionalReasonDescription: p.Reason,
 	}
+
+	// Add period information
+	period := p.Period
+	if period == nil {
+		// if no period is given, use the issue date as base
+		period = &cal.Period{
+			Start: *p.IssueDate,
+			End:   *p.IssueDate,
+		}
+	}
+	c.TaxPeriod = newPeriodDates(period)
 
 	// determine the reason from the extension
 	r := es.New()
