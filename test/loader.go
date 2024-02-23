@@ -12,14 +12,11 @@ import (
 	"github.com/ghodss/yaml"
 	"github.com/invopop/gobl"
 	facturae "github.com/invopop/gobl.facturae"
-	"github.com/invopop/gobl/dsig"
 	"github.com/invopop/xmldsig"
 )
 
 const certificateFile = "facturae.p12"
 const certificatePassword = "invopop"
-
-var signingKey = dsig.NewES256Key()
 
 // Random third party example data.
 var thirdParty = &facturae.ThirdParty{
