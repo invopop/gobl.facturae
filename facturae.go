@@ -10,7 +10,6 @@ import (
 
 	"github.com/invopop/gobl"
 	"github.com/invopop/gobl/bill"
-	"github.com/invopop/gobl/regimes/es"
 	"github.com/invopop/xmldsig"
 )
 
@@ -24,11 +23,6 @@ const (
 	XAdESSupplier   xmldsig.XAdESSignerRole = "supplier"
 	XAdESCustomer   xmldsig.XAdESSignerRole = "customer"
 	XAdESThirdParty xmldsig.XAdESSignerRole = "third party"
-)
-
-var (
-	// our global tax regime
-	regime = es.New()
 )
 
 var (
