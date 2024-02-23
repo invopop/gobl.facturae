@@ -119,6 +119,14 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 		return nil, fmt.Errorf("removing taxes: %w", err)
 	}
 
+	// Invert if we're dealing with a credit note
+	if invoice.Type == bill.InvoiceTypeCreditNote {
+		invoice.Invert()
+		if err := invoice.Calculate(); err != nil {
+			return nil, fmt.Errorf("inverting invoice: %w", err)
+		}
+	}
+
 	// Basic document headers
 	d := &Document{
 		env:         env,

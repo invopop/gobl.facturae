@@ -1,18 +1,28 @@
 {
 	"$schema": "https://gobl.org/draft-0/envelope",
 	"head": {
-		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
+		"uuid": "6df27ecc-d23d-11ee-b20e-8e3f6d4fff0a",
 		"dig": {
 			"alg": "sha256",
-			"val": "5fb2f7d316ebcf761d5bfcb44f850b959354ec6e440e6abafb3faeb3202489dd"
+			"val": "8da66d954b8b8c7a1a254a222034707b7c40b2a2ba199b95b6ea0876abf9562b"
 		}
 	},
 	"doc": {
 		"$schema": "https://gobl.org/draft-0/bill/invoice",
-		"type": "standard",
-		"code": "TEST01001F",
+		"type": "credit-note",
+		"code": "TEST01001R",
 		"issue_date": "2021-12-08",
 		"currency": "EUR",
+		"preceding": [
+			{
+				"type": "standard",
+				"code": "TEST01001F",
+				"issue_date": "2021-12-08",
+				"ext": {
+					"es-facturae-correction": "01"
+				}
+			}
+		],
 		"supplier": {
 			"name": "Hypeprop Sl",
 			"alias": "Hypeprop",
@@ -77,93 +87,64 @@
 				"i": 1,
 				"quantity": "20",
 				"item": {
-					"name": "Delivery",
-					"price": "50.00"
+					"name": "Operations and development - day rate",
+					"price": "200.00"
 				},
-				"sum": "1000.00",
+				"sum": "4000.00",
 				"taxes": [
 					{
 						"cat": "VAT",
-						"rate": "standard+eqs",
-						"percent": "21.0%",
-						"surcharge": "5.2%"
+						"rate": "standard",
+						"percent": "21.0%"
 					}
 				],
-				"total": "1000.00"
+				"total": "4000.00"
 			},
 			{
 				"i": 2,
-				"quantity": "50",
+				"quantity": "2",
 				"item": {
-					"name": "Branded Mug",
-					"price": "12.00"
+					"name": "Additional Overtime",
+					"price": "101.00"
 				},
-				"sum": "600.00",
+				"sum": "202.00",
 				"taxes": [
 					{
 						"cat": "VAT",
-						"rate": "standard+eqs",
-						"percent": "21.0%",
-						"surcharge": "5.2%"
+						"rate": "standard",
+						"percent": "21.0%"
 					}
 				],
-				"total": "600.00"
+				"total": "202.00"
 			}
 		],
-		"payment": {
-			"terms": {
-				"key": "due-date",
-				"due_dates": [
-					{
-						"date": "2021-12-30",
-						"amount": "2019.20",
-						"percent": "100%"
-					}
-				],
-				"notes": "Some kind of payment term note"
-			},
-			"instructions": {
-				"key": "credit-transfer",
-				"credit_transfer": [
-					{
-						"iban": "ES06 0128 0011 3901 0008 1391",
-						"name": "Bankinter"
-					}
-				]
-			}
-		},
 		"totals": {
-			"sum": "1600.00",
-			"total": "1600.00",
+			"sum": "4202.00",
+			"total": "4202.00",
 			"taxes": {
 				"categories": [
 					{
 						"code": "VAT",
 						"rates": [
 							{
-								"key": "standard+eqs",
-								"base": "1600.00",
+								"key": "standard",
+								"base": "4202.00",
 								"percent": "21.0%",
-								"surcharge": {
-									"percent": "5.2%",
-									"amount": "83.20"
-								},
-								"amount": "336.00"
+								"amount": "882.42"
 							}
 						],
-						"amount": "336.00",
-						"surcharge": "83.20"
+						"amount": "882.42"
 					}
 				],
-				"sum": "419.20"
+				"sum": "882.42"
 			},
-			"tax": "419.20",
-			"total_with_tax": "2019.20",
-			"payable": "2019.20"
+			"tax": "882.42",
+			"total_with_tax": "5084.42",
+			"payable": "5084.42"
 		},
 		"notes": [
 			{
-				"code": "general",
+				"key": "general",
 				"text": "Thank you for your custom!"
 			}
 		]

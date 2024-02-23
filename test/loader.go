@@ -1,6 +1,7 @@
 package test
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -10,7 +11,7 @@ import (
 
 	"github.com/ghodss/yaml"
 	"github.com/invopop/gobl"
-	"github.com/invopop/gobl.facturae"
+	facturae "github.com/invopop/gobl.facturae"
 	"github.com/invopop/gobl/dsig"
 	"github.com/invopop/xmldsig"
 )
@@ -39,9 +40,35 @@ var thirdParty = &facturae.ThirdParty{
 	},
 }
 
+// NewDocumentFrom creates a FacturaE Document from a GOBL file in the `test/data` folder
+func NewDocumentFrom(name string, opts ...facturae.Option) (*facturae.Document, error) {
+	env, err := LoadTestEnvelope(name)
+	if err != nil {
+		return nil, err
+	}
+	return facturae.NewInvoice(env, opts...)
+}
+
+// LoadTestEnvelope returns a GOBL Envelope from a file in the `test/data` folder
+func LoadTestEnvelope(name string) (*gobl.Envelope, error) {
+	src, _ := os.Open(filepath.Join(GetDataPath(), name))
+
+	buf := new(bytes.Buffer)
+	if _, err := buf.ReadFrom(src); err != nil {
+		return nil, err
+	}
+
+	env := new(gobl.Envelope)
+	if err := json.Unmarshal(buf.Bytes(), env); err != nil {
+		return nil, err
+	}
+
+	return env, nil
+}
+
 // LoadGOBL loads a GoBL test file into structs
 func LoadGOBL(name string, opts ...facturae.Option) (*facturae.Document, error) {
-	envelopeReader, _ := os.Open(GetDataPath() + name)
+	envelopeReader, _ := os.Open(filepath.Join(GetDataPath(), name))
 	doc, err := facturae.LoadGOBL(envelopeReader, opts...)
 	if err != nil {
 		return nil, err
@@ -81,10 +108,6 @@ func ConvertYAML() error {
 			return fmt.Errorf("failed to complete: %w", err)
 		}
 
-		if err := env.Sign(signingKey); err != nil {
-			return fmt.Errorf("failed to sign the doc: %w", err)
-		}
-
 		// Output to the filesystem
 		np := strings.TrimSuffix(path, filepath.Ext(path)) + ".json"
 		out, err := json.MarshalIndent(env, "", "	")
@@ -120,12 +143,13 @@ func ConvertToXML() error {
 		return err
 	}
 
-	// Load the config so we have an example third party
-
 	for _, file := range files {
 		fmt.Printf("processing file: %v\n", file)
 
-		doc, err := LoadGOBL(file, facturae.WithCertificate(cert), facturae.WithThirdParty(thirdParty))
+		doc, err := LoadGOBL(file,
+			facturae.WithCertificate(cert),
+			facturae.WithThirdParty(thirdParty),
+		)
 		if err != nil {
 			return err
 		}
@@ -145,10 +169,14 @@ func ConvertToXML() error {
 	return nil
 }
 
-// GetDataPath returns the path where test can find data files
-// to be used in tests
+// GetTestPath returns the path to the `test` folder
+func GetTestPath() string {
+	return filepath.Join(getRootFolder(), "test")
+}
+
+// GetDataPath returns the path to the `test/data` folder
 func GetDataPath() string {
-	return getRootFolder() + "/test/data/"
+	return filepath.Join(GetTestPath(), "data")
 }
 
 func getRootFolder() string {
@@ -189,4 +217,9 @@ func GetCertificatesPath() string {
 func LoadCertificate() (*xmldsig.Certificate, error) {
 	f := path.Join(GetCertificatesPath(), certificateFile)
 	return xmldsig.LoadCertificate(f, certificatePassword)
+}
+
+// ThirdParty returns a random third party for testing purposes
+func ThirdParty() *facturae.ThirdParty {
+	return thirdParty
 }

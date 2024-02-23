@@ -83,6 +83,32 @@ The command also supports pipes:
 cat input.json > ./gobl.facturae > output.xml
 ```
 
+### Testing
+
+This package uses [lestrrat-go/libxml2](https://github.com/lestrrat-go/libxml2) for testing purporses, which in turn depends on the libxml-2.0 C library. Ensure you have the development dependency installed. In linux this implies:
+
+```bash
+sudo apt-get install libxml2-dev
+```
+
+To specifically run the examples and update the output in the `/test/data/out` directory, run:
+
+```bash
+go test ./examples_test.go --update
+```
+
+For automated testing purposes, we don't attach certificates to the XML output. For manual testing of complete XML documents, digital certificates are available in the `/test/certificates` path which can be used to generate XML documents in the `/test/data/` path:
+
+```bash
+mage -v convertXML
+```
+
+YAML files are used for base examples. To generate the GOBL JSON, run:
+
+```bash
+mage -v convertYAML
+```
+
 ## Notes
 
 - To validate the XML output and digital certificates, use https://face.gob.es/es/facturas/validar-visualizar-facturas
@@ -90,24 +116,6 @@ cat input.json > ./gobl.facturae > output.xml
 
 ## Current Conversion Limitations
 
-The FacturaE format is quite complex due to the number of local requirements in Spain. We've put a lot of effort
+The FacturaE format is quite complex due to the number of local requirements in Spain.
 
 - _Payment Information_: FacturaE requires each payment instruction to have a Due Date. The GOBL invoice allows these details to be independent. If you require payment instructions to appear on a FacturaE document, there must be a due date.
-
-## Integration Tests
-
-There are some integration and XML generation tests available in the `/test` path. To execute them, there are two [Magefile](https://magefile.org/) commands.
-
-The first will convert YAML source data into GOBL JSON documents:
-
-```
-mage -v convertYAML
-```
-
-The second will generate the FacturaE XML documents from the GOBL sources, using the digital certificates that are available in the `/test/certificates` path:
-
-```
-mage -v convertXML
-```
-
-Sample data sources are contained in the `/test/data` directory. YAML and JSON (for tests) documents are stored in the Git repository, but the XML must be generated using the above commands.

@@ -1,0 +1,76 @@
+$schema: "https://gobl.org/draft-0/envelope"
+head:
+  uuid: "6df27ecc-d23d-11ee-b20e-8e3f6d4fff0a"
+
+doc:
+  $schema: "https://gobl.org/draft-0/bill/invoice"
+  type: "credit-note"
+  code: "TEST01001R"
+  currency: EUR
+  issue_date: "2021-12-08"
+
+  preceding:
+    - type: "standard"
+      code: "TEST01001F"
+      issue_date: "2021-12-08"
+      ext:
+        es-facturae-correction: "01"
+
+  supplier:
+    # Sample data from https://generadordni.es/#profiles
+    tax_id:
+      country: "ES"
+      code: "B23103039"
+    name: "Hypeprop Sl"
+    alias: "Hypeprop"
+    people:
+      - name:
+          given: "Paloma"
+          surname: "Araujo"
+    addresses:
+      - num: "74"
+        street: "Campo Real"
+        locality: "Torrejón De La Calzada"
+        region: "Madrid"
+        code: "28023"
+        country: "ES"
+    emails:
+      - addr: "rxazy27xfc@iname.com"
+    telephones:
+      - label: "office"
+        num: "+34910730028"
+
+  customer:
+    tax_id:
+      country: "ES"
+      code: "B77436020"
+    name: "Moniward Sl"
+    addresses:
+      - num: "35"
+        street: "Plaza Horno"
+        locality: "Nombela"
+        region: "Toledo"
+        code: "45083"
+        country: "ES"
+    emails:
+      - addr: "bfn25xf3p@lycos.co.uk"
+
+  lines:
+    - quantity: "20"
+      item:
+        name: "Operations and development - day rate"
+        price: "200.00"
+      taxes:
+        - cat: "VAT"
+          rate: "standard"
+    - quantity: "2"
+      item:
+        name: "Additional Overtime"
+        price: "101.00"
+      taxes:
+        - cat: "VAT"
+          rate: "standard"
+
+  notes:
+    - key: general
+      text: "Thank you for your custom!"

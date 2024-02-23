@@ -1,11 +1,14 @@
 module github.com/invopop/gobl.facturae
 
-go 1.19
+go 1.21
+
+toolchain go1.22.0
 
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/invopop/gobl v0.67.8
 	github.com/invopop/xmldsig v0.8.0
+	github.com/lestrrat-go/libxml2 v0.0.0-20231124114421-99c71026c2f5
 	github.com/magefile/mage v1.14.0
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.4
@@ -37,4 +40,4 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.2.0 // indirect
 )
 
-// replace github.com/invopop/gobl => ../gobl
+replace github.com/invopop/gobl => ../gobl
