@@ -6,7 +6,7 @@ toolchain go1.22.0
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/invopop/gobl v0.67.8
+	github.com/invopop/gobl v0.67.9
 	github.com/invopop/xmldsig v0.8.0
 	github.com/lestrrat-go/libxml2 v0.0.0-20231124114421-99c71026c2f5
 	github.com/magefile/mage v1.14.0
