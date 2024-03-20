@@ -6,7 +6,6 @@ import (
 	"github.com/invopop/gobl/cbc"
 	"github.com/invopop/gobl/i18n"
 	"github.com/invopop/gobl/regimes/es"
-	"github.com/invopop/gobl/tax"
 )
 
 // Corrective is used to represent the details of a previous invoice that
@@ -25,14 +24,14 @@ type Corrective struct {
 	InvoiceIssueDate            string `xml:",omitempty"`
 }
 
-var methodDefs = &tax.KeyDefinition{
+var methodDefs = &cbc.KeyDefinition{
 	// Take from "CorrectionMethodType"
 	Key: "correction-method",
 	Name: i18n.String{
 		i18n.EN: "Correction Method",
 		i18n.ES: "Método de rectificación",
 	},
-	Codes: []*tax.CodeDefinition{
+	Codes: []*cbc.CodeDefinition{
 		{
 			// Corrective
 			Code: cbc.Code("01"),
