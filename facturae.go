@@ -121,8 +121,7 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 
 	// Invert if we're dealing with a credit note
 	if invoice.Type == bill.InvoiceTypeCreditNote {
-		invoice.Invert()
-		if err := invoice.Calculate(); err != nil {
+		if err := invoice.Invert(); err != nil {
 			return nil, fmt.Errorf("inverting invoice: %w", err)
 		}
 	}
