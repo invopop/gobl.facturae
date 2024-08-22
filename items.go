@@ -91,9 +91,11 @@ func (l *InvoiceLine) addTaxes(total num.Amount, taxes *tax.Total, rates tax.Set
 
 		tax := new(Tax)
 		tax.Code = categoryTaxCodeMap[ct.Code]
-		tax.Rate = rate.Percent.StringWithoutSymbol()
 		tax.Base = makeAmount(total)
-		tax.Amount = makeAmount(rate.Percent.Of(total))
+		if rate.Percent != nil {
+			tax.Rate = rate.Percent.StringWithoutSymbol()
+			tax.Amount = makeAmount(rate.Percent.Of(total))
+		}
 		if rate.Surcharge != nil {
 			p := *rate.Surcharge
 			p.Amount = p.Amount.Rescale(4)

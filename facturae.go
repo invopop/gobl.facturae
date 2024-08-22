@@ -112,6 +112,10 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 		return nil, errors.New("expected an invoice")
 	}
 
+	if invoice.Customer == nil {
+		return nil, errors.New("customer required")
+	}
+
 	// Make sure we're dealing with raw data
 	var err error
 	invoice, err = invoice.RemoveIncludedTaxes()
@@ -144,11 +148,16 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 		d.Parties.Seller.LegalEntity = NewLegalEntity(invoice.Supplier)
 	}
 
-	d.Parties.Buyer.TaxID = NewTaxID(invoice.Customer.TaxID.Code, invoice.Customer.TaxID.Country)
-	if d.Parties.Buyer.TaxID.PersonTypeCode == "F" {
-		d.Parties.Buyer.Individual = NewIndividual(invoice.Customer)
-	} else {
-		d.Parties.Buyer.LegalEntity = NewLegalEntity(invoice.Customer)
+	if invoice.Customer != nil && invoice.Customer.TaxID != nil {
+		// Simplified invoices are not supported by FacturaE, but this is where
+		// they'd be handled if the situation changes.
+		b := d.Parties.Buyer
+		b.TaxID = NewTaxID(invoice.Customer.TaxID.Code, invoice.Customer.TaxID.Country)
+		if b.TaxID.PersonTypeCode == "F" {
+			b.Individual = NewIndividual(invoice.Customer)
+		} else {
+			b.LegalEntity = NewLegalEntity(invoice.Customer)
+		}
 	}
 
 	d.Invoices = &Invoices{
