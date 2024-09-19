@@ -4,11 +4,12 @@
 		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
 		"dig": {
 			"alg": "sha256",
-			"val": "9918a4d3ab9ecfe0292496395ce5c4af472ddbc2f5fa0da2a939fc901d98e8ac"
+			"val": "8b6e44baa280870de186b9a2efdea3dd8c314278de90878e00f925b6aeffb1df"
 		}
 	},
 	"doc": {
 		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"uuid": "01920bef-05f6-7dc3-ba7d-bec3746889b7",
 		"type": "standard",
 		"code": "TEST01002F",
 		"issue_date": "2021-12-08",
@@ -143,6 +144,22 @@
 					}
 				],
 				"total": "35.00"
+			},
+			{
+				"i": 4,
+				"quantity": "1",
+				"item": {
+					"name": "Exempt",
+					"price": "50.00"
+				},
+				"sum": "50.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"rate": "exempt"
+					}
+				],
+				"total": "50.00"
 			}
 		],
 		"outlays": [
@@ -167,9 +184,9 @@
 			}
 		},
 		"totals": {
-			"sum": "4037.00",
+			"sum": "4087.00",
 			"tax_included": "697.74",
-			"total": "3339.26",
+			"total": "3389.26",
 			"taxes": {
 				"categories": [
 					{
@@ -186,6 +203,11 @@
 								"base": "31.82",
 								"percent": "10.0%",
 								"amount": "3.18"
+							},
+							{
+								"key": "exempt",
+								"base": "50.00",
+								"amount": "0.00"
 							}
 						],
 						"amount": "697.74"
@@ -207,9 +229,9 @@
 				"sum": "201.63"
 			},
 			"tax": "201.63",
-			"total_with_tax": "3540.88",
+			"total_with_tax": "3590.88",
 			"outlays": "200.00",
-			"payable": "3740.88"
+			"payable": "3790.88"
 		}
 	}
 }

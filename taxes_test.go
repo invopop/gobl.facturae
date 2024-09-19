@@ -29,6 +29,12 @@ func TestListSummary(t *testing.T) {
 		assert.Equal(t, "10.0", to1.Rate)
 		assert.Equal(t, "3.18", to1.Amount.TotalAmount)
 
+		to3 := xmlInvoice.TaxesOutputs.List[2]
+		assert.Equal(t, "01", to3.Code)
+		assert.Equal(t, "50", to3.Base.TotalAmount)
+		assert.Equal(t, "0", to3.Rate)
+		assert.Equal(t, "0", to3.Amount.TotalAmount)
+
 		tw0 := xmlInvoice.TaxesWithheld.List[0]
 		assert.Equal(t, "04", tw0.Code)
 		assert.Equal(t, "3307.44", tw0.Base.TotalAmount)

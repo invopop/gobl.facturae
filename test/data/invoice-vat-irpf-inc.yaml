@@ -77,6 +77,13 @@ doc:
       taxes:
         - cat: "VAT"
           rate: "reduced"
+    - quantity: "1"
+      item:
+        name: "Exempt"
+        price: "50.00"
+      taxes:
+        - cat: "VAT"
+          rate: "exempt"
 
   outlays:
     - desc: "A product we had to pay for"
