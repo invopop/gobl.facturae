@@ -4,6 +4,7 @@ import (
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/gobl/cal"
 	"github.com/invopop/gobl/cbc"
+	"github.com/invopop/gobl/num"
 	"github.com/invopop/gobl/regimes/es"
 	"github.com/invopop/gobl/tax"
 )
@@ -108,9 +109,13 @@ func (inv *Invoice) setTaxes(taxes *tax.Total) {
 	// First loop for bases
 	for _, ct := range taxes.Categories {
 		for _, rt := range ct.Rates {
+			percent := rt.Percent
+			if percent == nil {
+				percent = num.NewPercentage(0, 0)
+			}
 			tax := &Tax{
 				Code:   categoryTaxCodeMap[ct.Code],
-				Rate:   rt.Percent.StringWithoutSymbol(),
+				Rate:   percent.StringWithoutSymbol(),
 				Base:   makeAmount(rt.Base),
 				Amount: makeAmount(rt.Amount),
 			}
