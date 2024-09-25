@@ -3,6 +3,7 @@ head:
   uuid: "679f2f25-7483-11ec-9722-7ea2cb436ff6"
 doc:
   $schema: "https://gobl.org/draft-0/bill/invoice"
+  $addons: ["es-facturae-v3"]
   code: "TEST01002F"
   currency: EUR
   issue_date: "2021-12-08"

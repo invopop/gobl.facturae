@@ -15,7 +15,7 @@ type TaxID struct {
 }
 
 // NewTaxID builds the tax identification information of a party
-func NewTaxID(taxNumber cbc.Code, countryCode l10n.CountryCode) *TaxID {
+func NewTaxID(taxNumber cbc.Code, countryCode l10n.TaxCountryCode) *TaxID {
 	return &TaxID{
 		PersonTypeCode:          personTypeCode(taxNumber),
 		ResidenceTypeCode:       residenceTypeCode(countryCode),
@@ -51,7 +51,7 @@ func personTypeCode(taxNumber cbc.Code) string {
 	return "J"
 }
 
-func residenceTypeCode(countryCode l10n.CountryCode) string {
+func residenceTypeCode(countryCode l10n.TaxCountryCode) string {
 	if residesInSpain(countryCode) {
 		return "R"
 	} else if residesInEU(countryCode) {
@@ -61,12 +61,12 @@ func residenceTypeCode(countryCode l10n.CountryCode) string {
 	}
 }
 
-func residesInSpain(countryCode l10n.CountryCode) bool {
-	return countryCode == l10n.ES
+func residesInSpain(countryCode l10n.TaxCountryCode) bool {
+	return countryCode == l10n.ES.Tax()
 }
 
-func residesInEU(countryCode l10n.CountryCode) bool {
-	switch countryCode {
+func residesInEU(countryCode l10n.TaxCountryCode) bool {
+	switch countryCode.Code() {
 	case
 		l10n.BE, // Belgium
 		l10n.BG, // Bulgaria

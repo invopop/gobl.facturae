@@ -80,7 +80,7 @@ func newPaymentDetails(paymentInfo *bill.Payment) *PaymentDetails {
 				if len(xmlInstallment.CollectionAdditionalInformation) > 0 {
 					xmlInstallment.CollectionAdditionalInformation += "\n"
 				}
-				xmlInstallment.CollectionAdditionalInformation += instructions.Online[0].Address
+				xmlInstallment.CollectionAdditionalInformation += instructions.Online[0].URL
 			}
 		}
 
