@@ -100,7 +100,7 @@ func (l *InvoiceLine) addTaxes(total num.Amount, taxes *tax.Total, rates tax.Set
 		tax.Amount = makeAmount(percent.Of(total))
 		if rate.Surcharge != nil {
 			p := *rate.Surcharge
-			p.Amount = p.Amount.Rescale(4)
+			p = p.Rescale(4)
 			tax.Surcharge = p.StringWithoutSymbol()
 			v := makeAmount(rate.Surcharge.Of(total))
 			tax.SurchargeAmount = &v

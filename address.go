@@ -44,14 +44,13 @@ func addressMaybe(element string) string {
 	return ""
 }
 
-// ES is the ISO 3166-1 alfa-3 code for Spain
+// ES is the ISO Alpha-3 code used for Spain
 const ES string = "ESP"
 
-func countryCode(country l10n.CountryCode) string {
-	switch country {
-	case l10n.ES:
-		return ES // FIXME: [JUANJO] add all the countries in the world?
+func countryCode(country l10n.ISOCountryCode) string {
+	cd := l10n.Countries().Code(country.Code())
+	if cd == nil {
+		return ""
 	}
-
-	return ""
+	return cd.Alpha3
 }

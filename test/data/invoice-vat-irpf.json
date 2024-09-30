@@ -4,15 +4,26 @@
 		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
 		"dig": {
 			"alg": "sha256",
-			"val": "e1ce8fdeefb9252533d7051f5da34970b81e8815288eb63373b0a7e2b8cc1fe6"
+			"val": "543d8dac323f3d69483f0fb3ef78c56068ae545e0e7ada5d701b9c716bc5a9bd"
 		}
 	},
 	"doc": {
 		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"$regime": "ES",
+		"$addons": [
+			"es-facturae-v3"
+		],
+		"uuid": "01922b1e-e286-7168-a7b4-c8ed9f158818",
 		"type": "standard",
 		"code": "TEST01002F",
 		"issue_date": "2021-12-08",
 		"currency": "EUR",
+		"tax": {
+			"ext": {
+				"es-facturae-doc-type": "FC",
+				"es-facturae-invoice-class": "OO"
+			}
+		},
 		"supplier": {
 			"name": "Maria Serivces",
 			"tax_id": {

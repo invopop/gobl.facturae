@@ -4,11 +4,16 @@
 		"uuid": "6df27ecc-d23d-11ee-b20e-8e3f6d4fff0a",
 		"dig": {
 			"alg": "sha256",
-			"val": "8da66d954b8b8c7a1a254a222034707b7c40b2a2ba199b95b6ea0876abf9562b"
+			"val": "fe42a6d30816c5fb8b96a98cf65935a1e850caea77e4839bbbf418d29547c6c3"
 		}
 	},
 	"doc": {
 		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"$regime": "ES",
+		"$addons": [
+			"es-facturae-v3"
+		],
+		"uuid": "01922b1e-e283-7860-96aa-c57af9ffe67b",
 		"type": "credit-note",
 		"code": "TEST01001R",
 		"issue_date": "2021-12-08",
@@ -16,13 +21,19 @@
 		"preceding": [
 			{
 				"type": "standard",
-				"code": "TEST01001F",
 				"issue_date": "2021-12-08",
+				"code": "TEST01001F",
 				"ext": {
 					"es-facturae-correction": "01"
 				}
 			}
 		],
+		"tax": {
+			"ext": {
+				"es-facturae-doc-type": "FC",
+				"es-facturae-invoice-class": "OR"
+			}
+		},
 		"supplier": {
 			"name": "Hypeprop Sl",
 			"alias": "Hypeprop",

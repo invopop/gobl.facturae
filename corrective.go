@@ -1,11 +1,12 @@
 package facturae
 
 import (
+	"github.com/invopop/gobl/addons/es/facturae"
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/gobl/cal"
 	"github.com/invopop/gobl/cbc"
 	"github.com/invopop/gobl/i18n"
-	"github.com/invopop/gobl/regimes/es"
+	"github.com/invopop/gobl/tax"
 )
 
 // Corrective is used to represent the details of a previous invoice that
@@ -31,10 +32,10 @@ var methodDefs = &cbc.KeyDefinition{
 		i18n.EN: "Correction Method",
 		i18n.ES: "Método de rectificación",
 	},
-	Codes: []*cbc.CodeDefinition{
+	Values: []*cbc.ValueDefinition{
 		{
 			// Corrective
-			Code: cbc.Code("01"),
+			Value: "01",
 			Name: i18n.String{
 				i18n.EN: "Full items",
 				i18n.ES: "Rectificación íntegra",
@@ -42,7 +43,7 @@ var methodDefs = &cbc.KeyDefinition{
 		},
 		{
 			// Credit or Debit notes
-			Code: cbc.Code("02"),
+			Value: "02",
 			Name: i18n.String{
 				i18n.EN: "Corrected items only",
 				i18n.ES: "Rectificación por diferencias",
@@ -50,7 +51,7 @@ var methodDefs = &cbc.KeyDefinition{
 		},
 		{
 			// Unused
-			Code: cbc.Code("03"),
+			Value: "03",
 			Name: i18n.String{
 				i18n.EN: "Bulk deal",
 				i18n.ES: "Rectificación por descuento por volumen de operaciones durante un periodo",
@@ -58,7 +59,7 @@ var methodDefs = &cbc.KeyDefinition{
 		},
 		{
 			// Unused
-			Code: cbc.Code("04"),
+			Value: "04",
 			Name: i18n.String{
 				i18n.EN: "Authorized by the Tax Agency",
 				i18n.ES: "Autorizadas por la Agencia Tributaria",
@@ -70,8 +71,8 @@ var methodDefs = &cbc.KeyDefinition{
 func newCorrective(inv *bill.Invoice) *Corrective {
 	p := inv.Preceding[0]
 	c := &Corrective{
-		InvoiceNumber:               p.Code,
-		InvoiceSeriesCode:           p.Series,
+		InvoiceNumber:               p.Code.String(),
+		InvoiceSeriesCode:           p.Series.String(),
 		InvoiceIssueDate:            p.IssueDate.String(),
 		AdditionalReasonDescription: p.Reason,
 	}
@@ -88,25 +89,24 @@ func newCorrective(inv *bill.Invoice) *Corrective {
 	c.TaxPeriod = newPeriodDates(period)
 
 	// determine the reason from the extension
-	r := es.New()
-	kd := r.ExtensionDef(es.ExtKeyFacturaECorrection)
-	cc := p.Ext[es.ExtKeyFacturaECorrection]
-	row := kd.CodeDef(cc.Code())
+	kd := tax.ExtensionForKey(facturae.ExtKeyCorrection)
+	cc := p.Ext[facturae.ExtKeyCorrection]
+	row := kd.ValueDef(cc.String())
 	if row != nil {
-		c.ReasonCode = row.Code.String()
+		c.ReasonCode = row.Value
 		c.ReasonDescription = row.Name[i18n.ES]
 	}
 
 	// determine the method from the type of invoice
-	cm := cbc.Code("04") // default assume "authorized"
+	cm := "04" // default assume "authorized"
 	switch inv.Type {
 	case bill.InvoiceTypeCorrective:
-		cm = cbc.Code("01")
+		cm = "01"
 	case bill.InvoiceTypeCreditNote, bill.InvoiceTypeDebitNote:
-		cm = cbc.Code("02")
+		cm = "02"
 	}
-	md := methodDefs.CodeDef(cm)
-	c.CorrectionMethod = md.Code.String()
+	md := methodDefs.ValueDef(cm)
+	c.CorrectionMethod = md.Value
 	c.CorrectionMethodDescription = md.Name[i18n.ES]
 
 	return c

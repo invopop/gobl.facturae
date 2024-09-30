@@ -1,11 +1,11 @@
 package facturae
 
 import (
+	"github.com/invopop/gobl/addons/es/facturae"
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/gobl/cal"
 	"github.com/invopop/gobl/cbc"
 	"github.com/invopop/gobl/num"
-	"github.com/invopop/gobl/regimes/es"
 	"github.com/invopop/gobl/tax"
 )
 
@@ -125,7 +125,7 @@ func (inv *Invoice) setTaxes(taxes *tax.Total) {
 				if rt.Surcharge != nil {
 					st := rt.Surcharge
 					p := st.Percent
-					p.Amount = p.Amount.Rescale(4) // we need 2 decimal places
+					p = p.Rescale(4) // we need 2 decimal places
 					tax.Surcharge = p.StringWithoutSymbol()
 					v := makeAmount(st.Amount)
 					tax.SurchargeAmount = &v
@@ -148,14 +148,14 @@ func (inv *Invoice) setTaxes(taxes *tax.Total) {
 
 func newInvoiceHeader(inv *bill.Invoice) *InvoiceHeader {
 	h := &InvoiceHeader{
-		InvoiceNumber:     inv.Code,
-		InvoiceSeriesCode: inv.Series,
+		InvoiceNumber:     inv.Code.String(),
+		InvoiceSeriesCode: inv.Series.String(),
 	}
 
-	ss := inv.ScenarioSummary()
-
-	h.InvoiceDocumentType = ss.Codes[es.KeyFacturaEInvoiceDocumentType].String()
-	h.InvoiceClass = ss.Codes[es.KeyFacturaEInvoiceClass].String()
+	if inv.Tax != nil {
+		h.InvoiceDocumentType = inv.Tax.Ext[facturae.ExtKeyDocType].String()
+		h.InvoiceClass = inv.Tax.Ext[facturae.ExtKeyInvoiceClass].String()
+	}
 
 	// Only one preceding document currently supported
 	if len(inv.Preceding) > 0 {
