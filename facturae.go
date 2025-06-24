@@ -211,6 +211,21 @@ func (d *Document) Bytes() ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// BytesIndent returns the XML document bytes with indentation for readability.
+// This is useful for debugging and testing purposes, but should not be used in
+// production as it will not work correctly with digital signatures.
+func (d *Document) BytesIndent() ([]byte, error) {
+	buf := bytes.NewBufferString(xml.Header)
+	data, err := xml.MarshalIndent(d, "", "\t")
+	if err != nil {
+		return nil, fmt.Errorf("marshal document: %w", err)
+	}
+	if _, err := buf.Write(data); err != nil {
+		return nil, fmt.Errorf("writing to buffer: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
 func (d *Document) buffer(base string) (*bytes.Buffer, error) {
 	buf := bytes.NewBufferString(base)
 	// data, err := xml.MarshalIndent(d, "", "  ") // not compatible with certificates

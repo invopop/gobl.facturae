@@ -97,11 +97,11 @@ func convertExample(example string, opts ...facturae.Option) ([]byte, error) {
 		return nil, err
 	}
 
-	return doc.Bytes()
+	return doc.BytesIndent()
 }
 
 func validateDoc(schema *xsd.Schema, doc []byte) []error {
-	xmlDoc, err := libxml2.ParseString(string(doc))
+	xmlDoc, err := libxml2.Parse(doc)
 	if err != nil {
 		return []error{err}
 	}
