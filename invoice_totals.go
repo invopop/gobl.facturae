@@ -80,9 +80,11 @@ func newInvoiceTotals(invoice *bill.Invoice) *InvoiceTotals {
 		due = *totals.Due
 		outstanding = *totals.Due
 	}
-	if totals.Outlays != nil {
-		outstanding = outstanding.Subtract(*totals.Outlays)
-	}
+	/*
+		if totals.Outlays != nil {
+			outstanding = outstanding.Subtract(*totals.Outlays)
+		}
+	*/
 
 	xmlTotals := &InvoiceTotals{
 		TotalGrossAmount:            sum.String(),
@@ -103,14 +105,16 @@ func newInvoiceTotals(invoice *bill.Invoice) *InvoiceTotals {
 	if totals.Advances != nil {
 		xmlTotals.TotalPaymentsOnAccount = totals.Advances.String()
 	}
-	if totals.Outlays != nil {
-		xmlTotals.TotalReimbursableExpenses = totals.Outlays.String()
-	}
+	/*
+		if totals.Outlays != nil {
+			xmlTotals.TotalReimbursableExpenses = totals.Outlays.String()
+		}
+	*/
 
 	if invoice.Payment != nil {
 		xmlTotals.setAdvances(invoice.Payment.Advances)
 	}
-	xmlTotals.setOutlays(invoice.Outlays)
+	// xmlTotals.setOutlays(invoice.Outlays)
 	xmlTotals.setTaxTotals(totals.Taxes)
 
 	return xmlTotals
@@ -167,6 +171,7 @@ func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
 	}
 }
 
+/*
 func (it *InvoiceTotals) setOutlays(outlays []*bill.Outlay) {
 	os := make([]*ReimbursableExpense, 0)
 	for _, o := range outlays {
@@ -190,3 +195,4 @@ func (it *InvoiceTotals) setOutlays(outlays []*bill.Outlay) {
 		}
 	}
 }
+*/

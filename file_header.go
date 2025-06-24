@@ -51,9 +51,10 @@ type Batch struct {
 
 func newFileHeader(invoice *bill.Invoice, tp *ThirdParty) *FileHeader {
 	outstanding := invoice.Totals.Payable
-	if invoice.Totals.Outlays != nil {
-		outstanding = outstanding.Subtract(*invoice.Totals.Outlays)
-	}
+	// Outlays not currently supported...
+	//if invoice.Totals.Outlays != nil {
+	//	outstanding = outstanding.Subtract(*invoice.Totals.Outlays)
+	//}
 	ii := InvoiceIssuerSeller
 	if tp != nil {
 		ii = InvoiceIssuerThirdParty

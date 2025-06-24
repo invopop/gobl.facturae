@@ -45,9 +45,13 @@ const (
 )
 
 func newItems(lines []*bill.Line, taxes *tax.Total) *Items {
-	xmlLines := make([]*InvoiceLine, len(lines))
-	for i, line := range lines {
-		xmlLines[i] = newInvoiceLine(line, taxes)
+	xmlLines := make([]*InvoiceLine, 0, len(lines))
+	for _, line := range lines {
+		if line.Total == nil {
+			// skip empty lines
+			continue
+		}
+		xmlLines = append(xmlLines, newInvoiceLine(line, taxes))
 	}
 	return &Items{
 		InvoiceLine: xmlLines,
@@ -70,7 +74,7 @@ func newInvoiceLine(line *bill.Line, taxes *tax.Total) *InvoiceLine {
 		Charges:             newLineCharges(line.Charges),
 		GrossAmount:         line.Total.MinimalString(),
 	}
-	xmlLine.addTaxes(line.Total, taxes, line.Taxes)
+	xmlLine.addTaxes(*line.Total, taxes, line.Taxes)
 
 	return xmlLine
 }

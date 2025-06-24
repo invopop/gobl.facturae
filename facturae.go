@@ -117,9 +117,7 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 	}
 
 	// Make sure we're dealing with raw data
-	var err error
-	invoice, err = invoice.RemoveIncludedTaxes()
-	if err != nil {
+	if err := invoice.RemoveIncludedTaxes(); err != nil {
 		return nil, fmt.Errorf("removing taxes: %w", err)
 	}
 

@@ -18,7 +18,7 @@ type Address struct {
 func newAddress(address *org.Address) *Address {
 	return &Address{
 		Address:     addressLine1(address),
-		PostCode:    address.Code,
+		PostCode:    address.Code.String(),
 		Town:        address.Locality,
 		Province:    address.Region,
 		CountryCode: countryCode(address.Country),

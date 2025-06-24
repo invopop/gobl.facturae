@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/invopop/gobl/bill"
-	"github.com/invopop/gobl/cbc"
+	"github.com/invopop/gobl/org"
 )
 
 // AdditionalData stores notes that the provider of the invoice
@@ -17,7 +17,7 @@ func newAdditionalData(inv *bill.Invoice) *AdditionalData {
 	txt := make([]string, 0)
 	for _, n := range inv.Notes {
 		// Skip legal codes, we have already dealt with them in Legal Literals
-		if n.Key != cbc.NoteKeyLegal {
+		if n.Key != org.NoteKeyLegal {
 			txt = append(txt, n.Text)
 		}
 	}

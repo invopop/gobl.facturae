@@ -19,7 +19,7 @@ func NewTaxID(taxNumber cbc.Code, countryCode l10n.TaxCountryCode) *TaxID {
 	return &TaxID{
 		PersonTypeCode:          personTypeCode(taxNumber),
 		ResidenceTypeCode:       residenceTypeCode(countryCode),
-		TaxIdentificationNumber: strings.Replace(taxNumber.String(), "-", "", -1),
+		TaxIdentificationNumber: strings.ReplaceAll(taxNumber.String(), "-", ""),
 	}
 }
 
