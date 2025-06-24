@@ -41,7 +41,7 @@ var facturaePaymentMethodCodes = map[cbc.Key]string{
 	pay.MeansKeyOnline:         "13",
 }
 
-func newPaymentDetails(paymentInfo *bill.Payment) *PaymentDetails {
+func newPaymentDetails(paymentInfo *bill.PaymentDetails) *PaymentDetails {
 	if paymentInfo == nil {
 		return nil
 	}

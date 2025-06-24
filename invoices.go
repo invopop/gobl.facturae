@@ -4,8 +4,8 @@ import (
 	"github.com/invopop/gobl/addons/es/facturae"
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/gobl/cal"
-	"github.com/invopop/gobl/cbc"
 	"github.com/invopop/gobl/num"
+	"github.com/invopop/gobl/org"
 	"github.com/invopop/gobl/tax"
 )
 
@@ -171,7 +171,7 @@ func newLegalLiterals(inv *bill.Invoice) *LegalLiterals {
 		return nil
 	}
 	for _, n := range inv.Notes {
-		if n.Key == cbc.NoteKeyLegal {
+		if n.Key == org.NoteKeyLegal {
 			lits = append(lits, n.Text)
 		}
 	}

@@ -117,9 +117,7 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 	}
 
 	// Make sure we're dealing with raw data
-	var err error
-	invoice, err = invoice.RemoveIncludedTaxes()
-	if err != nil {
+	if err := invoice.RemoveIncludedTaxes(); err != nil {
 		return nil, fmt.Errorf("removing taxes: %w", err)
 	}
 
@@ -209,6 +207,21 @@ func (d *Document) Bytes() ([]byte, error) {
 	buf, err := d.Buffer()
 	if err != nil {
 		return nil, err
+	}
+	return buf.Bytes(), nil
+}
+
+// BytesIndent returns the XML document bytes with indentation for readability.
+// This is useful for debugging and testing purposes, but should not be used in
+// production as it will not work correctly with digital signatures.
+func (d *Document) BytesIndent() ([]byte, error) {
+	buf := bytes.NewBufferString(xml.Header)
+	data, err := xml.MarshalIndent(d, "", "\t")
+	if err != nil {
+		return nil, fmt.Errorf("marshal document: %w", err)
+	}
+	if _, err := buf.Write(data); err != nil {
+		return nil, fmt.Errorf("writing to buffer: %w", err)
 	}
 	return buf.Bytes(), nil
 }
