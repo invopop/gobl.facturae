@@ -1,17 +1,17 @@
 package facturae_test
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	facturae "github.com/invopop/gobl.facturae"
 	"github.com/invopop/gobl.facturae/test"
-	"github.com/lestrrat-go/libxml2"
-	"github.com/lestrrat-go/libxml2/xsd"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -19,8 +19,7 @@ import (
 var updateOut = flag.Bool("update", false, "Update the XML files in the test/data/out directory")
 
 func TestXMLGeneration(t *testing.T) {
-	schema, err := loadSchema()
-	require.NoError(t, err)
+	schemaPath := filepath.Join(test.GetTestPath(), "schema", "facturaev3_2_2.xsd")
 
 	examples, err := lookupExamples()
 	require.NoError(t, err)
@@ -37,7 +36,7 @@ func TestXMLGeneration(t *testing.T) {
 			outPath := filepath.Join(test.GetDataPath(), "out", strings.TrimSuffix(example, ".json")+".xml")
 
 			if *updateOut {
-				errs := validateDoc(schema, data)
+				errs := validateWithXmllint(schemaPath, data)
 				for _, e := range errs {
 					assert.NoError(t, e)
 				}
@@ -59,16 +58,6 @@ func TestXMLGeneration(t *testing.T) {
 			require.Equal(t, string(expected), string(data), "output file %s does not match, run tests with `--update` flag to update", filepath.Base(outPath))
 		})
 	}
-}
-
-func loadSchema() (*xsd.Schema, error) {
-	schemaPath := filepath.Join(test.GetTestPath(), "schema", "facturaev3_2_2.xsd")
-	schema, err := xsd.ParseFromFile(schemaPath)
-	if err != nil {
-		return nil, err
-	}
-
-	return schema, nil
 }
 
 func lookupExamples() ([]string, error) {
@@ -100,15 +89,26 @@ func convertExample(example string, opts ...facturae.Option) ([]byte, error) {
 	return doc.BytesIndent()
 }
 
-func validateDoc(schema *xsd.Schema, doc []byte) []error {
-	xmlDoc, err := libxml2.Parse(doc)
-	if err != nil {
-		return []error{err}
-	}
+func validateWithXmllint(schemaPath string, doc []byte) []error {
+	cmd := exec.Command("xmllint", "--schema", schemaPath, "--noout", "-")
+	cmd.Stdin = bytes.NewReader(doc)
 
-	err = schema.Validate(xmlDoc)
+	var stderr bytes.Buffer
+	cmd.Stderr = &stderr
+
+	err := cmd.Run()
 	if err != nil {
-		return err.(xsd.SchemaValidationError).Errors()
+		// xmllint returns non-zero exit code on validation errors
+		if stderr.Len() > 0 {
+			var errs []error
+			for _, line := range strings.Split(stderr.String(), "\n") {
+				if strings.TrimSpace(line) != "" {
+					errs = append(errs, fmt.Errorf("%s", line))
+				}
+			}
+			return errs
+		}
+		return []error{err}
 	}
 
 	return nil

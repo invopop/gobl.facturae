@@ -4,7 +4,7 @@
 		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
 		"dig": {
 			"alg": "sha256",
-			"val": "7bcf27c52304384f0bd39114e16d322bfb9ff8c7701566df4bf0287f45a0e6c5"
+			"val": "1231c8dfb1a2d37ac652071a3ecac93cc2ddba5728064e808a877bb5984f2f25"
 		}
 	},
 	"doc": {
@@ -13,7 +13,7 @@
 		"$addons": [
 			"es-facturae-v3"
 		],
-		"uuid": "01922b1e-e288-7ab9-82f3-0c8c8c7956bc",
+		"uuid": "019c4e4d-0fe4-72e6-9579-55f09974a200",
 		"type": "standard",
 		"code": "TEST01001F",
 		"issue_date": "2021-12-08",
@@ -95,7 +95,8 @@
 				"taxes": [
 					{
 						"cat": "VAT",
-						"rate": "standard",
+						"key": "standard",
+						"rate": "general",
 						"percent": "21.0%"
 					}
 				],
@@ -112,7 +113,8 @@
 				"taxes": [
 					{
 						"cat": "VAT",
-						"rate": "standard",
+						"key": "standard",
+						"rate": "general",
 						"percent": "21.0%"
 					}
 				],

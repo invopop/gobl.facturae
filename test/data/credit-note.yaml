@@ -63,14 +63,14 @@ doc:
         price: "200.00"
       taxes:
         - cat: "VAT"
-          rate: "standard"
+          rate: "general"
     - quantity: "2"
       item:
         name: "Additional Overtime"
         price: "101.00"
       taxes:
         - cat: "VAT"
-          rate: "standard"
+          rate: "general"
 
   notes:
     - key: general

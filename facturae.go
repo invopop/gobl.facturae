@@ -151,6 +151,7 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 		// they'd be handled if the situation changes.
 		b := d.Parties.Buyer
 		b.TaxID = NewTaxID(invoice.Customer.TaxID.Code, invoice.Customer.TaxID.Country)
+		b.AdministrativeCentres = NewAdministrativeCentres(invoice)
 		if b.TaxID.PersonTypeCode == "F" {
 			b.Individual = NewIndividual(invoice.Customer)
 		} else {

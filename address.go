@@ -5,14 +5,21 @@ import (
 	"github.com/invopop/gobl/org"
 )
 
-// Address stores location information
-// FIXME: para direcciones extranjeras hay un campo diferentes PostCodeAndTown
+// Address stores location information for addresses in Spain
 type Address struct {
 	Address     string `xml:",omitempty"`
 	PostCode    string `xml:",omitempty"`
 	Town        string `xml:",omitempty"`
 	Province    string `xml:",omitempty"`
 	CountryCode string `xml:",omitempty"`
+}
+
+// OverseasAddress stores location information for addresses outside Spain
+type OverseasAddress struct {
+	Address         string `xml:",omitempty"`
+	PostCodeAndTown string `xml:",omitempty"`
+	Province        string `xml:",omitempty"`
+	CountryCode     string `xml:",omitempty"`
 }
 
 func newAddress(address *org.Address) *Address {
@@ -22,6 +29,19 @@ func newAddress(address *org.Address) *Address {
 		Town:        address.Locality,
 		Province:    address.Region,
 		CountryCode: countryCode(address.Country),
+	}
+}
+
+func newOverseasAddress(address *org.Address) *OverseasAddress {
+	postCodeAndTown := address.Locality
+	if address.Code != "" {
+		postCodeAndTown = address.Code.String() + " " + address.Locality
+	}
+	return &OverseasAddress{
+		Address:         addressLine1(address),
+		PostCodeAndTown: postCodeAndTown,
+		Province:        address.Region,
+		CountryCode:     countryCode(address.Country),
 	}
 }
 

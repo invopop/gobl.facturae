@@ -59,7 +59,7 @@ doc:
           reason: "just because"
       taxes:
         - cat: "VAT"
-          rate: "standard"
+          rate: "general"
         - cat: "IRPF"
           rate: "pro"
     - quantity: "2"
@@ -68,7 +68,7 @@ doc:
         price: "101.00"
       taxes:
         - cat: "VAT"
-          rate: "standard"
+          rate: "general"
         - cat: "IRPF"
           rate: "pro"
     - quantity: "1"

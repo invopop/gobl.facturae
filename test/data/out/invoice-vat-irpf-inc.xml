@@ -28,10 +28,10 @@
 				<TotalAmount>4087</TotalAmount>
 			</TotalInvoicesAmount>
 			<TotalOutstandingAmount>
-				<TotalAmount>3094.77</TotalAmount>
+				<TotalAmount>3590.89</TotalAmount>
 			</TotalOutstandingAmount>
 			<TotalExecutableAmount>
-				<TotalAmount>3094.77</TotalAmount>
+				<TotalAmount>3590.89</TotalAmount>
 			</TotalExecutableAmount>
 			<InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
 		</Batch>
@@ -144,8 +144,8 @@
 				<TotalTaxOutputs>697.74</TotalTaxOutputs>
 				<TotalTaxesWithheld>496.12</TotalTaxesWithheld>
 				<InvoiceTotal>4087.00</InvoiceTotal>
-				<TotalOutstandingAmount>3094.77</TotalOutstandingAmount>
-				<TotalExecutableAmount>3094.77</TotalExecutableAmount>
+				<TotalOutstandingAmount>3590.89</TotalOutstandingAmount>
+				<TotalExecutableAmount>3590.89</TotalExecutableAmount>
 			</InvoiceTotals>
 			<Items>
 				<InvoiceLine>
