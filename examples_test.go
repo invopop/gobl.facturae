@@ -90,6 +90,11 @@ func convertExample(example string, opts ...facturae.Option) ([]byte, error) {
 }
 
 func validateWithXmllint(schemaPath string, doc []byte) []error {
+	// Check if xmllint is available
+	if _, err := exec.LookPath("xmllint"); err != nil {
+		return []error{fmt.Errorf("xmllint not found in PATH: please install libxml2-utils (Debian/Ubuntu) or libxml2 (macOS/others) to validate XML against the schema")}
+	}
+
 	cmd := exec.Command("xmllint", "--schema", schemaPath, "--noout", "-")
 	cmd.Stdin = bytes.NewReader(doc)
 

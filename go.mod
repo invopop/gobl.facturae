@@ -5,7 +5,6 @@ go 1.24.0
 toolchain go1.24.3
 
 require (
-	github.com/ghodss/yaml v1.0.0
 	github.com/invopop/gobl v0.307.0
 	github.com/invopop/xmldsig v0.11.0
 	github.com/magefile/mage v1.15.0
@@ -34,7 +33,6 @@ require (
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/wk8/go-ordered-map/v2 v2.1.8 // indirect
 	golang.org/x/crypto v0.48.0 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	software.sslmate.com/src/go-pkcs12 v0.7.0 // indirect
 )
