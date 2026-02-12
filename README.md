@@ -105,7 +105,7 @@ The conversion process follows these steps:
 
 #### Dependencies
 
-This package uses [lestrrat-go/libxml2](https://github.com/lestrrat-go/libxml2) for testing purposes, which depends on the libxml-2.0 C library. Install the development dependencies:
+For XML schema validation during testing, this package uses [go-xsd-validate](https://github.com/terminalstatic/go-xsd-validate), which depends on the libxml2 C library. This dependency is **optional** and only required when running tests with the `xsdvalidate` build tag.
 
 **Debian/Ubuntu:**
 ```bash
@@ -117,24 +117,18 @@ sudo apt-get install libxml2-dev
 brew install libxml2
 ```
 
-Additionally, for XML schema validation, you need xmllint:
-
-**Debian/Ubuntu:**
-```bash
-sudo apt-get install libxml2-utils
-```
-
-**macOS:**
-```bash
-# xmllint is included with libxml2
-brew install libxml2
-```
+Tests will run without libxml2, but schema validation will be skipped unless you explicitly enable it with the `-tags xsdvalidate` flag.
 
 #### Running Tests
 
-Run all tests:
+Run all tests (without schema validation):
 ```bash
 go test ./...
+```
+
+Run tests with XSD schema validation (requires libxml2):
+```bash
+go test -tags xsdvalidate ./...
 ```
 
 Run tests for a specific example:
@@ -155,15 +149,15 @@ Test data is organized in the `test/data/` directory:
 When you make changes that affect XML output, update the fixtures:
 
 ```bash
-go test -run TestXMLGeneration --update
+go test -tags xsdvalidate -run TestXMLGeneration --update
 ```
 
 This will:
 1. Convert all JSON examples to FacturaE XML
-2. Validate each XML against the schema using xmllint (if installed)
+2. Validate each XML against the schema (requires libxml2)
 3. Update the fixtures in `test/data/out/`
 
-**Note**: If xmllint is not installed, the test will fail with a clear error message explaining how to install it. The validation step ensures generated XML is valid according to the official FacturaE schema.
+**Note**: The `-tags xsdvalidate` flag enables schema validation to ensure generated XML is valid according to the official FacturaE schema. Without this flag, fixtures will be updated but validation will be skipped.
 
 #### Manual Testing with Certificates
 
@@ -174,14 +168,6 @@ mage -v convertXML
 ```
 
 Digital certificates for testing are available in `/test/certificates`.
-
-#### Working with YAML Examples
-
-Base examples can be written in YAML for easier editing. Convert YAML to GOBL JSON:
-
-```bash
-mage -v convertYAML
-```
 
 ### Validation
 
@@ -209,13 +195,15 @@ This is **expected behavior** because:
 
 **Solution**: Test fixtures should reflect the amounts **after** conversion, not the original GOBL amounts. Update fixtures using `go test --update`.
 
-#### xmllint Not Found
+#### Schema Validation
 
-If you see an error like "xmllint not found in PATH" when running tests with `--update`:
+To enable XSD schema validation during testing:
 
-1. The validation step requires xmllint to check generated XML against the schema
-2. Install libxml2-utils (Debian/Ubuntu) or libxml2 (macOS)
-3. This is only required when updating fixtures, not for regular test runs
+1. Install libxml2 development libraries (see Dependencies section above)
+2. Run tests with the `-tags xsdvalidate` flag
+3. Without this flag, tests will run but skip schema validation
+
+This is particularly useful when updating fixtures to ensure generated XML conforms to the official FacturaE schema.
 
 #### Test Failures After GOBL Updates
 

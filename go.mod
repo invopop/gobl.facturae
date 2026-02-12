@@ -10,6 +10,7 @@ require (
 	github.com/magefile/mage v1.15.0
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
+	github.com/terminalstatic/go-xsd-validate v0.1.6
 	gitlab.com/flimzy/testy v0.14.0
 )
 

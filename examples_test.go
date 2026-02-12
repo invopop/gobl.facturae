@@ -1,26 +1,21 @@
 package facturae_test
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	facturae "github.com/invopop/gobl.facturae"
 	"github.com/invopop/gobl.facturae/test"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 var updateOut = flag.Bool("update", false, "Update the XML files in the test/data/out directory")
 
 func TestXMLGeneration(t *testing.T) {
-	schemaPath := filepath.Join(test.GetTestPath(), "schema", "facturaev3_2_2.xsd")
-
 	examples, err := lookupExamples()
 	require.NoError(t, err)
 
@@ -36,14 +31,7 @@ func TestXMLGeneration(t *testing.T) {
 			outPath := filepath.Join(test.GetDataPath(), "out", strings.TrimSuffix(example, ".json")+".xml")
 
 			if *updateOut {
-				errs := validateWithXmllint(schemaPath, data)
-				for _, e := range errs {
-					assert.NoError(t, e)
-				}
-				if len(errs) > 0 {
-					assert.Fail(t, "Invalid XML:\n"+string(data))
-					return
-				}
+				test.ValidateAgainstSchema(t, data)
 
 				err = os.WriteFile(outPath, data, 0644)
 				require.NoError(t, err)
@@ -87,34 +75,4 @@ func convertExample(example string, opts ...facturae.Option) ([]byte, error) {
 	}
 
 	return doc.BytesIndent()
-}
-
-func validateWithXmllint(schemaPath string, doc []byte) []error {
-	// Check if xmllint is available
-	if _, err := exec.LookPath("xmllint"); err != nil {
-		return []error{fmt.Errorf("xmllint not found in PATH: please install libxml2-utils (Debian/Ubuntu) or libxml2 (macOS/others) to validate XML against the schema")}
-	}
-
-	cmd := exec.Command("xmllint", "--schema", schemaPath, "--noout", "-")
-	cmd.Stdin = bytes.NewReader(doc)
-
-	var stderr bytes.Buffer
-	cmd.Stderr = &stderr
-
-	err := cmd.Run()
-	if err != nil {
-		// xmllint returns non-zero exit code on validation errors
-		if stderr.Len() > 0 {
-			var errs []error
-			for _, line := range strings.Split(stderr.String(), "\n") {
-				if strings.TrimSpace(line) != "" {
-					errs = append(errs, fmt.Errorf("%s", line))
-				}
-			}
-			return errs
-		}
-		return []error{err}
-	}
-
-	return nil
 }
