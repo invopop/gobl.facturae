@@ -6,23 +6,33 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/lestrrat-go/libxml2"
+	"github.com/lestrrat-go/libxml2/xsd"
 	"github.com/stretchr/testify/require"
-	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 )
 
 // ValidateAgainstSchema validates the given data against the FacturaE schema.
 func ValidateAgainstSchema(t *testing.T, data []byte) {
-	err := xsdvalidate.Init()
-	require.NoError(t, err)
-	t.Cleanup(xsdvalidate.Cleanup)
-
-	// Use file path instead of memory to allow relative imports to resolve
+	// Load the XSD schema
 	schemaPath := filepath.Join(GetTestPath(), "schema", "facturaev3_2_2.xsd")
-	xsdhandler, err := xsdvalidate.NewXsdHandlerUrl(schemaPath, xsdvalidate.ParsErrVerbose)
+	schema, err := xsd.ParseFromFile(schemaPath)
 	require.NoError(t, err)
-	t.Cleanup(xsdhandler.Free)
 
-	validation := xsdhandler.ValidateMem(data, xsdvalidate.ParsErrDefault)
-	assert.Nil(t, validation)
+	// Parse the XML document
+	doc, err := libxml2.ParseString(string(data))
+	require.NoError(t, err)
+
+	// Validate the document against the schema
+	err = schema.Validate(doc)
+	if err != nil {
+		if validationErr, ok := err.(xsd.SchemaValidationError); ok {
+			t.Errorf("Schema validation failed with %d errors:", len(validationErr.Errors()))
+			for _, e := range validationErr.Errors() {
+				t.Errorf("  - %s", e.Error())
+			}
+			t.FailNow()
+		} else {
+			require.NoError(t, err)
+		}
+	}
 }

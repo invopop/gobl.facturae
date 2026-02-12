@@ -7,10 +7,10 @@ toolchain go1.24.3
 require (
 	github.com/invopop/gobl v0.307.0
 	github.com/invopop/xmldsig v0.11.0
+	github.com/lestrrat-go/libxml2 v0.0.0-20240905100032-c934e3fcb9d3
 	github.com/magefile/mage v1.15.0
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
-	github.com/terminalstatic/go-xsd-validate v0.1.6
 	gitlab.com/flimzy/testy v0.14.0
 )
 
