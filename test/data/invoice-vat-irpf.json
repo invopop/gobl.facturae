@@ -4,7 +4,7 @@
 		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff6",
 		"dig": {
 			"alg": "sha256",
-			"val": "543d8dac323f3d69483f0fb3ef78c56068ae545e0e7ada5d701b9c716bc5a9bd"
+			"val": "a48e322678ed727e6d31d43116487c409aa6ed82d7aac6d3bc176b365618b3cb"
 		}
 	},
 	"doc": {
@@ -13,7 +13,7 @@
 		"$addons": [
 			"es-facturae-v3"
 		],
-		"uuid": "01922b1e-e286-7168-a7b4-c8ed9f158818",
+		"uuid": "019c4e4d-0fe0-79b2-8cba-b31ccb3a8904",
 		"type": "standard",
 		"code": "TEST01002F",
 		"issue_date": "2021-12-08",
@@ -94,15 +94,16 @@
 				"sum": "4000.00",
 				"discounts": [
 					{
+						"reason": "just because",
 						"percent": "5.0%",
-						"amount": "200.00",
-						"reason": "just because"
+						"amount": "200.00"
 					}
 				],
 				"taxes": [
 					{
 						"cat": "VAT",
-						"rate": "standard",
+						"key": "standard",
+						"rate": "general",
 						"percent": "21.0%"
 					},
 					{
@@ -124,7 +125,8 @@
 				"taxes": [
 					{
 						"cat": "VAT",
-						"rate": "standard",
+						"key": "standard",
+						"rate": "general",
 						"percent": "21.0%"
 					},
 					{
@@ -146,6 +148,7 @@
 				"taxes": [
 					{
 						"cat": "VAT",
+						"key": "standard",
 						"rate": "reduced",
 						"percent": "10.0%"
 					}
@@ -153,10 +156,10 @@
 				"total": "35.00"
 			}
 		],
-		"outlays": [
+		"charges": [
 			{
 				"i": 1,
-				"description": "A product we had to pay for",
+				"key": "outlay",
 				"amount": "200.00"
 			}
 		],
@@ -176,7 +179,8 @@
 		},
 		"totals": {
 			"sum": "4037.00",
-			"total": "4037.00",
+			"charge": "200.00",
+			"total": "4237.00",
 			"taxes": {
 				"categories": [
 					{
@@ -189,7 +193,7 @@
 								"amount": "840.42"
 							},
 							{
-								"key": "reduced",
+								"key": "standard",
 								"base": "35.00",
 								"percent": "10.0%",
 								"amount": "3.50"
@@ -202,7 +206,6 @@
 						"retained": true,
 						"rates": [
 							{
-								"key": "pro",
 								"base": "4002.00",
 								"percent": "15.0%",
 								"amount": "600.30"
@@ -211,11 +214,12 @@
 						"amount": "600.30"
 					}
 				],
-				"sum": "243.62"
+				"sum": "843.92",
+				"retained": "600.30"
 			},
-			"tax": "243.62",
-			"total_with_tax": "4280.62",
-			"outlays": "200.00",
+			"tax": "843.92",
+			"total_with_tax": "5080.92",
+			"retained_tax": "600.30",
 			"payable": "4480.62"
 		}
 	}

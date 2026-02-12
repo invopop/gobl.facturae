@@ -1,0 +1,145 @@
+{
+	"$schema": "https://gobl.org/draft-0/envelope",
+	"head": {
+		"uuid": "679f2f25-7483-11ec-9722-7ea2cb436ff7",
+		"dig": {
+			"alg": "sha256",
+			"val": "a48e322678ed727e6d31d43116487c409aa6ed82d7aac6d3bc176b365618b3cd"
+		}
+	},
+	"doc": {
+		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"$regime": "ES",
+		"$addons": [
+			"es-facturae-v3"
+		],
+		"uuid": "019c4e4d-0fe0-79b2-8cba-b31ccb3a8905",
+		"type": "standard",
+		"code": "TEST01005F",
+		"issue_date": "2021-12-08",
+		"currency": "EUR",
+		"tax": {
+			"ext": {
+				"es-facturae-doc-type": "FC",
+				"es-facturae-invoice-class": "OO"
+			}
+		},
+		"supplier": {
+			"name": "Jean-Pierre Consulting",
+			"tax_id": {
+				"country": "FR",
+				"code": "123456789012"
+			},
+			"people": [
+				{
+					"name": {
+						"given": "Jean-Pierre",
+						"surname": "Dubois",
+						"surname2": "Martin"
+					}
+				}
+			],
+			"addresses": [
+				{
+					"num": "42",
+					"street": "Rue de la Paix",
+					"locality": "Paris",
+					"region": "Île-de-France",
+					"code": "75002",
+					"country": "FR"
+				}
+			],
+			"emails": [
+				{
+					"addr": "jpdubois@example.fr"
+				}
+			],
+			"telephones": [
+				{
+					"label": "mobile",
+					"num": "+33612345678"
+				}
+			]
+		},
+		"customer": {
+			"name": "Spanish Company SL",
+			"tax_id": {
+				"country": "ES",
+				"code": "B77436020"
+			},
+			"addresses": [
+				{
+					"num": "35",
+					"street": "Plaza Horno",
+					"locality": "Nombela",
+					"region": "Toledo",
+					"code": "45083",
+					"country": "ES"
+				}
+			],
+			"emails": [
+				{
+					"addr": "contact@spanish-company.es"
+				}
+			]
+		},
+		"lines": [
+			{
+				"i": 1,
+				"quantity": "10",
+				"item": {
+					"name": "Consulting Services",
+					"price": "150.00"
+				},
+				"sum": "1500.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"key": "standard",
+						"rate": "general",
+						"percent": "21.0%"
+					}
+				],
+				"total": "1500.00"
+			}
+		],
+		"payment": {
+			"terms": {
+				"key": "instant"
+			},
+			"instructions": {
+				"key": "credit-transfer",
+				"credit_transfer": [
+					{
+						"iban": "FR76 1234 5678 9012 3456 7890 123",
+						"name": "BNP Paribas"
+					}
+				]
+			}
+		},
+		"totals": {
+			"sum": "1500.00",
+			"total": "1500.00",
+			"taxes": {
+				"categories": [
+					{
+						"code": "VAT",
+						"rates": [
+							{
+								"key": "standard",
+								"base": "1500.00",
+								"percent": "21.0%",
+								"amount": "315.00"
+							}
+						],
+						"amount": "315.00"
+					}
+				],
+				"sum": "315.00"
+			},
+			"tax": "315.00",
+			"total_with_tax": "1815.00",
+			"payable": "1815.00"
+		}
+	}
+}

@@ -45,5 +45,59 @@ func TestPartiesInfoCustomer(t *testing.T) {
 		assert.Equal(t, "ESP", doc.Parties.Buyer.LegalEntity.AddressInSpain.CountryCode)
 		assert.Equal(t, "bfn25xf3p@lycos.co.uk", doc.Parties.Buyer.LegalEntity.ContactDetails.ElectronicMail)
 	})
+}
 
+func TestAdministrativeCentres(t *testing.T) {
+	t.Run("should contain administrative centres for FACe invoices", func(t *testing.T) {
+		doc, err := test.LoadGOBL("invoice-face.json")
+		require.NoError(t, err)
+
+		centres := doc.Parties.Buyer.AdministrativeCentres
+		require.NotNil(t, centres)
+		require.Len(t, centres.Centres, 3)
+
+		// Role 01 - Oficina Contable (from customer identities)
+		assert.Equal(t, "L01280796", centres.Centres[0].CentreCode)
+		assert.Equal(t, "01", centres.Centres[0].RoleTypeCode)
+		assert.Equal(t, "Plaza de la Villa, 4", centres.Centres[0].AddressInSpain.Address)
+		assert.Equal(t, "28005", centres.Centres[0].AddressInSpain.PostCode)
+		assert.Equal(t, "Madrid", centres.Centres[0].AddressInSpain.Town)
+
+		// Role 02 - Órgano Gestor (from delivery.receiver)
+		assert.Equal(t, "LA0007407", centres.Centres[1].CentreCode)
+		assert.Equal(t, "02", centres.Centres[1].RoleTypeCode)
+		assert.Equal(t, "Calle Alcalá, 3", centres.Centres[1].AddressInSpain.Address)
+		assert.Equal(t, "28014", centres.Centres[1].AddressInSpain.PostCode)
+
+		// Role 03 - Unidad Tramitadora (from ordering.buyer)
+		assert.Equal(t, "LA0007408", centres.Centres[2].CentreCode)
+		assert.Equal(t, "03", centres.Centres[2].RoleTypeCode)
+		assert.Equal(t, "Gran Vía, 10", centres.Centres[2].AddressInSpain.Address)
+		assert.Equal(t, "28013", centres.Centres[2].AddressInSpain.PostCode)
+	})
+
+	t.Run("should not include administrative centres when not present", func(t *testing.T) {
+		doc, err := test.LoadGOBL("invoice-vat.json")
+		require.NoError(t, err)
+
+		assert.Nil(t, doc.Parties.Buyer.AdministrativeCentres)
+	})
+}
+
+func TestOverseasAddressIndividual(t *testing.T) {
+	t.Run("should contain overseas address for individual supplier", func(t *testing.T) {
+		doc, err := test.LoadGOBL("invoice-overseas-individual.json")
+		require.NoError(t, err)
+
+		seller := doc.Parties.Seller
+		require.NotNil(t, seller.Individual)
+		require.NotNil(t, seller.Individual.OverseasAddress)
+		assert.Nil(t, seller.Individual.AddressInSpain)
+
+		// Verify overseas address fields
+		assert.Equal(t, "Rue de la Paix, 42", seller.Individual.OverseasAddress.Address)
+		assert.Equal(t, "75002 Paris", seller.Individual.OverseasAddress.PostCodeAndTown)
+		assert.Equal(t, "Île-de-France", seller.Individual.OverseasAddress.Province)
+		assert.Equal(t, "FRA", seller.Individual.OverseasAddress.CountryCode)
+	})
 }
