@@ -156,6 +156,13 @@
 				"total": "35.00"
 			}
 		],
+		"charges": [
+			{
+				"i": 1,
+				"key": "outlay",
+				"amount": "200.00"
+			}
+		],
 		"payment": {
 			"terms": {
 				"key": "instant"
@@ -172,7 +179,8 @@
 		},
 		"totals": {
 			"sum": "4037.00",
-			"total": "4037.00",
+			"charge": "200.00",
+			"total": "4237.00",
 			"taxes": {
 				"categories": [
 					{
@@ -210,9 +218,9 @@
 				"retained": "600.30"
 			},
 			"tax": "843.92",
-			"total_with_tax": "4880.92",
+			"total_with_tax": "5080.92",
 			"retained_tax": "600.30",
-			"payable": "4280.62"
+			"payable": "4480.62"
 		}
 	}
 }

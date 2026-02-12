@@ -25,13 +25,13 @@
 			<BatchIdentifier>37221735F-TEST01002F</BatchIdentifier>
 			<InvoicesCount>1</InvoicesCount>
 			<TotalInvoicesAmount>
-				<TotalAmount>4880.92</TotalAmount>
+				<TotalAmount>5080.92</TotalAmount>
 			</TotalInvoicesAmount>
 			<TotalOutstandingAmount>
-				<TotalAmount>4280.62</TotalAmount>
+				<TotalAmount>4480.62</TotalAmount>
 			</TotalOutstandingAmount>
 			<TotalExecutableAmount>
-				<TotalAmount>4280.62</TotalAmount>
+				<TotalAmount>4480.62</TotalAmount>
 			</TotalExecutableAmount>
 			<InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
 		</Batch>
@@ -132,12 +132,19 @@
 			</TaxesWithheld>
 			<InvoiceTotals>
 				<TotalGrossAmount>4037.00</TotalGrossAmount>
-				<TotalGrossAmountBeforeTaxes>4037.00</TotalGrossAmountBeforeTaxes>
+				<GeneralSurcharges>
+					<Charge>
+						<ChargeReason></ChargeReason>
+						<ChargeAmount>200.00</ChargeAmount>
+					</Charge>
+				</GeneralSurcharges>
+				<TotalGeneralSurcharges>200.00</TotalGeneralSurcharges>
+				<TotalGrossAmountBeforeTaxes>4237.00</TotalGrossAmountBeforeTaxes>
 				<TotalTaxOutputs>843.92</TotalTaxOutputs>
 				<TotalTaxesWithheld>600.30</TotalTaxesWithheld>
-				<InvoiceTotal>4880.92</InvoiceTotal>
-				<TotalOutstandingAmount>4280.62</TotalOutstandingAmount>
-				<TotalExecutableAmount>4280.62</TotalExecutableAmount>
+				<InvoiceTotal>5080.92</InvoiceTotal>
+				<TotalOutstandingAmount>4480.62</TotalOutstandingAmount>
+				<TotalExecutableAmount>4480.62</TotalExecutableAmount>
 			</InvoiceTotals>
 			<Items>
 				<InvoiceLine>

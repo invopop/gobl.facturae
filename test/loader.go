@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ghodss/yaml"
 	"github.com/invopop/gobl"
 	facturae "github.com/invopop/gobl.facturae"
 	"github.com/invopop/xmldsig"
@@ -71,54 +70,6 @@ func LoadGOBL(name string, opts ...facturae.Option) (*facturae.Document, error) 
 		return nil, err
 	}
 	return doc, nil
-}
-
-// ConvertYAML takes the YAML test data and converts into useful json gobl documents.
-func ConvertYAML() error {
-	var files []string
-	err := filepath.Walk(GetDataPath(), func(path string, info os.FileInfo, err error) error {
-		if filepath.Ext(path) == ".yaml" {
-			files = append(files, path)
-		}
-		return nil
-	})
-	if err != nil {
-		return err
-	}
-
-	for _, path := range files {
-		fmt.Printf("processing file: %v\n", path)
-
-		// attempt to load and convert
-		data, err := os.ReadFile(path)
-		if err != nil {
-			return fmt.Errorf("reading file: %w", err)
-		}
-
-		// TODO: gobl should have a more direct way to do this soon!
-		env := new(gobl.Envelope)
-		if err := yaml.Unmarshal(data, env); err != nil {
-			return fmt.Errorf("invalid contents: %w", err)
-		}
-
-		if err := env.Calculate(); err != nil {
-			return fmt.Errorf("failed to complete: %w", err)
-		}
-
-		// Output to the filesystem
-		np := strings.TrimSuffix(path, filepath.Ext(path)) + ".json"
-		out, err := json.MarshalIndent(env, "", "	")
-		if err != nil {
-			return fmt.Errorf("marshalling output: %w", err)
-		}
-		if err := os.WriteFile(np, out, 0644); err != nil {
-			return fmt.Errorf("saving file data: %w", err)
-		}
-
-		fmt.Printf("wrote file: %v\n", np)
-	}
-
-	return nil
 }
 
 // ConvertToXML takes the .json invoices generated previously and converts them
