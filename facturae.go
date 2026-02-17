@@ -9,6 +9,7 @@ import (
 	"io"
 
 	"github.com/invopop/gobl"
+	addon "github.com/invopop/gobl/addons/es/facturae"
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/xmldsig"
 )
@@ -110,6 +111,10 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 	invoice, ok := env.Extract().(*bill.Invoice)
 	if !ok {
 		return nil, errors.New("expected an invoice")
+	}
+
+	if !addon.V3.In(invoice.GetAddons()...) {
+		return nil, fmt.Errorf("missing %s addon", addon.V3.String())
 	}
 
 	if invoice.Customer == nil {
