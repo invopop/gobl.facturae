@@ -7,19 +7,34 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	facturae "github.com/invopop/gobl.facturae"
 	"github.com/invopop/gobl.facturae/test"
+	"github.com/invopop/xmldsig"
 	"github.com/stretchr/testify/require"
 )
 
 var updateOut = flag.Bool("update", false, "Update the XML files in the test/data/out directory")
 
+// signingTime is a fixed timestamp used for deterministic XAdES signatures in
+// the examples so that the generated XML files can be compared across runs.
+var signingTime = time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC)
+
 func TestXMLGeneration(t *testing.T) {
 	examples, err := lookupExamples()
 	require.NoError(t, err)
 
-	opts := prepareOptions()
+	cert, err := test.LoadCertificate()
+	require.NoError(t, err)
+
+	opts := []facturae.Option{
+		facturae.WithThirdParty(test.ThirdParty()),
+		facturae.WithCertificate(cert),
+		facturae.WithSigning(
+			xmldsig.WithCurrentTime(func() time.Time { return signingTime }),
+		),
+	}
 
 	for _, example := range examples {
 		name := fmt.Sprintf("should convert %s example file successfully", example)
@@ -59,13 +74,6 @@ func lookupExamples() ([]string, error) {
 	}
 
 	return examples, nil
-}
-
-func prepareOptions() []facturae.Option {
-	opts := []facturae.Option{
-		facturae.WithThirdParty(test.ThirdParty()),
-	}
-	return opts
 }
 
 func convertExample(example string, opts ...facturae.Option) ([]byte, error) {

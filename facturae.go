@@ -57,6 +57,7 @@ type options struct {
 	certificate  *xmldsig.Certificate
 	addTimestamp bool
 	thirdParty   *ThirdParty
+	signingOpts  []xmldsig.Option
 }
 
 // Option defines a callback configuration option used to customize the
@@ -82,6 +83,15 @@ func WithTimestamp(val bool) Option {
 func WithThirdParty(tp *ThirdParty) Option {
 	return func(opts *options) {
 		opts.thirdParty = tp
+	}
+}
+
+// WithSigning allows passing additional xmldsig options that will be appended
+// to the signing call. Useful to inject a deterministic signing time or other
+// parameters in tests.
+func WithSigning(opts ...xmldsig.Option) Option {
+	return func(o *options) {
+		o.signingOpts = append(o.signingOpts, opts...)
 	}
 }
 
@@ -184,6 +194,7 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 		if xmlOpts.addTimestamp {
 			sigopts = append(sigopts, xmldsig.WithTimestamp(xmldsig.TimestampFreeTSA))
 		}
+		sigopts = append(sigopts, xmlOpts.signingOpts...)
 		sig, err := xmldsig.Sign(data, sigopts...)
 		if err != nil {
 			return nil, err
