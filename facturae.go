@@ -12,6 +12,7 @@ import (
 	addon "github.com/invopop/gobl/addons/es/facturae"
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/xmldsig"
+	"github.com/invopop/xmldsig/profiles/facturae"
 )
 
 // Namespaces used for FacturaE. DSig stuff is handled in the signatures.
@@ -24,19 +25,6 @@ const (
 	XAdESSupplier   xmldsig.XAdESSignerRole = "supplier"
 	XAdESCustomer   xmldsig.XAdESSignerRole = "customer"
 	XAdESThirdParty xmldsig.XAdESSignerRole = "third party"
-)
-
-var (
-	xadesConfig = &xmldsig.XAdESConfig{
-		Role:        XAdESThirdParty,
-		Description: "Factura Electrónica",
-		Policy: &xmldsig.XAdESPolicyConfig{
-			URL:         "http://www.facturae.es/politica_de_firma_formato_facturae/politica_de_firma_formato_facturae_v3_1.pdf",
-			Description: "Política de Firma FacturaE v3.1",
-			Algorithm:   "http://www.w3.org/2000/09/xmldsig#sha1",
-			Hash:        "Ohixl6upD6av8N7pEvDABhEL6hM=",
-		},
-	}
 )
 
 // Document is a pseudo-model for containing the XML document being created.
@@ -186,9 +174,26 @@ func NewInvoice(env *gobl.Envelope, opts ...Option) (*Document, error) {
 			return nil, fmt.Errorf("converting to canonincal format: %w", err)
 		}
 
+		dsigCfg := facturae.XMLDSigConfig()
+		dsigCfg.OmitDataCanonicalizationTransform = true
+
+		xadesCfg := facturae.XAdESConfig(
+			xmldsig.XAdESConfig{
+				Role:        XAdESThirdParty,
+				Description: "Factura Electrónica",
+				Policy: &xmldsig.XAdESPolicyConfig{
+					URL:         "http://www.facturae.es/politica_de_firma_formato_facturae/politica_de_firma_formato_facturae_v3_1.pdf",
+					Description: "Política de Firma FacturaE v3.1",
+					Algorithm:   "http://www.w3.org/2000/09/xmldsig#sha1",
+					Hash:        "Ohixl6upD6av8N7pEvDABhEL6hM=",
+				},
+			},
+		)
+
 		sigopts := []xmldsig.Option{
 			xmldsig.WithDocID(env.Head.UUID.String()),
-			xmldsig.WithXAdES(xadesConfig),
+			xmldsig.WithXMLDSigConfig(dsigCfg),
+			xmldsig.WithXAdESConfig(xadesCfg),
 			xmldsig.WithCertificate(xmlOpts.certificate),
 		}
 		if xmlOpts.addTimestamp {

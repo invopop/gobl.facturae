@@ -6,11 +6,11 @@ toolchain go1.24.3
 
 require (
 	github.com/invopop/gobl v0.307.0
-	github.com/invopop/xmldsig v0.11.0
+	github.com/invopop/xmldsig v0.14.0
 	github.com/lestrrat-go/libxml2 v0.0.0-20240905100032-c934e3fcb9d3
 	github.com/magefile/mage v1.15.0
 	github.com/spf13/cobra v1.9.1
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 	gitlab.com/flimzy/testy v0.14.0
 )
 
@@ -28,9 +28,11 @@ require (
 	github.com/invopop/jsonschema v0.13.0 // indirect
 	github.com/invopop/validation v0.8.0 // indirect
 	github.com/invopop/yaml v0.3.1 // indirect
+	github.com/jonboulle/clockwork v0.5.0 // indirect
 	github.com/mailru/easyjson v0.9.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/russellhaering/goxmldsig v1.5.0 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/wk8/go-ordered-map/v2 v2.1.8 // indirect
 	golang.org/x/crypto v0.48.0 // indirect
