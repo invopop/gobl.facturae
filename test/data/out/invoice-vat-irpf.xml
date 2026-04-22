@@ -131,17 +131,17 @@
 				</Tax>
 			</TaxesWithheld>
 			<InvoiceTotals>
-				<TotalGrossAmount>4037.00</TotalGrossAmount>
+				<TotalGrossAmount>4037</TotalGrossAmount>
 				<GeneralSurcharges>
 					<Charge>
 						<ChargeReason></ChargeReason>
-						<ChargeAmount>200.00</ChargeAmount>
+						<ChargeAmount>200</ChargeAmount>
 					</Charge>
 				</GeneralSurcharges>
-				<TotalGeneralSurcharges>200.00</TotalGeneralSurcharges>
-				<TotalGrossAmountBeforeTaxes>4237.00</TotalGrossAmountBeforeTaxes>
+				<TotalGeneralSurcharges>200</TotalGeneralSurcharges>
+				<TotalGrossAmountBeforeTaxes>4237</TotalGrossAmountBeforeTaxes>
 				<TotalTaxOutputs>843.92</TotalTaxOutputs>
-				<TotalTaxesWithheld>600.30</TotalTaxesWithheld>
+				<TotalTaxesWithheld>600.3</TotalTaxesWithheld>
 				<InvoiceTotal>5080.92</InvoiceTotal>
 				<TotalOutstandingAmount>4480.62</TotalOutstandingAmount>
 				<TotalExecutableAmount>4480.62</TotalExecutableAmount>
@@ -156,7 +156,7 @@
 						<Discount>
 							<DiscountReason>just because</DiscountReason>
 							<DiscountRate>5.0</DiscountRate>
-							<DiscountAmount>200.00</DiscountAmount>
+							<DiscountAmount>200</DiscountAmount>
 						</Discount>
 					</DiscountsAndRebates>
 					<GrossAmount>3800</GrossAmount>
@@ -247,7 +247,7 @@
 					<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 				</ds:Transforms>
 				<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></ds:DigestMethod>
-				<ds:DigestValue>Md2uUh+r3P6QUytHouwFdLTqXxtXXXfEAzL2KvSv3nIfqkQyt2Vpk0uO3lKUo8DrqKnS7IKFJLSAz0FFSfT5qg==</ds:DigestValue>
+				<ds:DigestValue>/hinGVPxFlWWKtZDrXzaXu4uum7tPYr0TS31+EOaZ7M1euMj61B4ZZ3lU3hefyoxW8u6eeftcdP/aN1GClVbFA==</ds:DigestValue>
 			</ds:Reference>
 			<ds:Reference URI="#Certificate-679f2f25-7483-11ec-9722-7ea2cb436ff6">
 				<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></ds:DigestMethod>
@@ -261,7 +261,7 @@
 				<ds:DigestValue>7JJy4akxa8EA0VaYKrzrTRE0QG/MPxW0cHZFnziNTdU7YvpBuS8nn5dMWU2tmnogdoNBJKlKwFu91ganWKxiWQ==</ds:DigestValue>
 			</ds:Reference>
 		</ds:SignedInfo>
-		<ds:SignatureValue Id="Signature-679f2f25-7483-11ec-9722-7ea2cb436ff6-SignatureValue">JHCzOuMZ74Ufe1/Ue6GmzQKqbq4kNqZl2a+OyrvQQo3YKIShNN1LKf3TsXq8h14o8B/pTZPs5UMKMVbs25Pb6H7dr87rluw22yyLgjzckNHBgE9rMRDT4/QSSU3TCknVNCCgq2qV+M9rRGO3i1o7UzG0hQWTYNwKXfDQPccvIAgBMK5AW7x00YZCj/Ve4p7dYsV5HQ6ClLCVTZlLiDKBmoRGEqRZftv3NLRhlzbo5SExg4VgrXVUKNWBg+fqLd3I0Y8I4m1tOK080i9eW/EpxYM2B83UqoaE5Rl0FaZROzjVLMM8OGHJdBYai3HQsgE6cYlIfjoF36lsM64TceB40A==</ds:SignatureValue>
+		<ds:SignatureValue Id="Signature-679f2f25-7483-11ec-9722-7ea2cb436ff6-SignatureValue">H6bfLEpwAVX/lbm4CSmk/4wgHQ4nZ1ilYnbmBTnXf1yFWwQKIfG/Brj6Rqf614NogWbFNzm3Awk5G87b+96ncpzHvqwpHUbbn6Jsd+Iw7QstKhJVcTKFEw6vFasaTfQYIN2D6SJVeMfwsw0JvthiP0jSEtKc0KMYE17YtLs5iwohK52tR6on3eYI1eBpyXUPI32jSJG6W2OX8Lp4g2rzLJuU9qm+5HhQaLoco4iV4yY+n5ebhO0xTOrgRV1lg/DtMzucRVqKBMFQ3wKMEC6WwYvzQYyHNCV5PrYPyp7l70fMlGogC9YunCOudwaWZ1eHS3/BJyxntA1PPPOMs/l18w==</ds:SignatureValue>
 		<ds:KeyInfo Id="Certificate-679f2f25-7483-11ec-9722-7ea2cb436ff6">
 			<ds:X509Data>
 				<ds:X509Certificate>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</ds:X509Certificate>
