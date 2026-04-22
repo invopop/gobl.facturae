@@ -89,7 +89,7 @@ func (d *Document) newInvoice(invoice *bill.Invoice) *Invoice {
 		},
 		InvoiceTotals:  newInvoiceTotals(invoice),
 		AdditionalData: newAdditionalData(invoice),
-		PaymentDetails: newPaymentDetails(invoice.Payment),
+		PaymentDetails: newPaymentDetails(invoice.Payment, invoice.Totals),
 		LegalLiterals:  newLegalLiterals(invoice),
 		Items:          newItems(invoice.Lines, invoice.Totals.Taxes),
 	}
