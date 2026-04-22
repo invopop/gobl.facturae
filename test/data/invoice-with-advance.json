@@ -4,7 +4,7 @@
 		"uuid": "7b2a6f80-7483-11ec-9722-7ea2cb436ff6",
 		"dig": {
 			"alg": "sha256",
-			"val": "7e79c4f6de0dfbed0c1db37ab18a5ea5c47dbe0987e40cd6b6e62659324c7e1b"
+			"val": "08209d6736ea7d5e92ede10b322d744e13ade23f74988705a85f7737d1049fab"
 		}
 	},
 	"doc": {
@@ -89,6 +89,16 @@
 			}
 		],
 		"payment": {
+			"terms": {
+				"key": "due-date",
+				"due_dates": [
+					{
+						"date": "2021-12-30",
+						"amount": "4840.00",
+						"percent": "100%"
+					}
+				]
+			},
 			"advances": [
 				{
 					"date": "2021-11-01",
@@ -96,7 +106,16 @@
 					"description": "Initial deposit",
 					"amount": "1000.00"
 				}
-			]
+			],
+			"instructions": {
+				"key": "credit-transfer",
+				"credit_transfer": [
+					{
+						"iban": "ES25 0188 2570 7185 4470 4761",
+						"name": "Bankrandom"
+					}
+				]
+			}
 		},
 		"totals": {
 			"sum": "4000.00",

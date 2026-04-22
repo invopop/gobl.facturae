@@ -3,6 +3,7 @@ package facturae
 import (
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/gobl/cbc"
+	"github.com/invopop/gobl/num"
 	"github.com/invopop/gobl/pay"
 )
 
@@ -41,7 +42,7 @@ var facturaePaymentMethodCodes = map[cbc.Key]string{
 	pay.MeansKeyOnline:         "13",
 }
 
-func newPaymentDetails(paymentInfo *bill.PaymentDetails) *PaymentDetails {
+func newPaymentDetails(paymentInfo *bill.PaymentDetails, totals *bill.Totals) *PaymentDetails {
 	if paymentInfo == nil {
 		return nil
 	}
@@ -59,7 +60,7 @@ func newPaymentDetails(paymentInfo *bill.PaymentDetails) *PaymentDetails {
 	for i, installment := range terms.DueDates {
 		xmlInstallment := &Installment{
 			InstallmentDueDate:              installment.Date.String(),
-			InstallmentAmount:               installment.Amount.String(),
+			InstallmentAmount:               installmentAmount(installment.Amount, totals).String(),
 			PaymentMeans:                    facturaePaymentMethodCodes[instructions.Key],
 			CollectionAdditionalInformation: mergeNotes(paymentInfo.Terms.Notes, installment.Notes),
 		}
@@ -110,6 +111,19 @@ func newDebitBankAccount(info *pay.DirectDebit) *BankAccount {
 	return &BankAccount{
 		AccountNumber: info.Account,
 	}
+}
+
+// installmentAmount returns the amount actually due on an installment date.
+// GOBL's due_dates always sum to totals.Payable (gross of advances), but
+// Facturae's InstallmentAmount is the "importe a satisfacer" — what the
+// payer still has to transfer on that date. When advances are present
+// (totals.Due is set), scale each installment by Due/Payable so the sum
+// of InstallmentAmount values matches the invoice's outstanding amount.
+func installmentAmount(raw num.Amount, totals *bill.Totals) num.Amount {
+	if totals == nil || totals.Due == nil || totals.Payable.IsZero() {
+		return raw
+	}
+	return raw.Multiply(*totals.Due).Divide(totals.Payable)
 }
 
 func mergeNotes(termNotes string, installmentNotes string) string {
