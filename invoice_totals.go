@@ -157,6 +157,7 @@ func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
 			if a.Date != nil {
 				na.PaymentOnAccountDate = *a.Date
 			}
+			regular = append(regular, na)
 		}
 	}
 	if len(regular) > 0 {
