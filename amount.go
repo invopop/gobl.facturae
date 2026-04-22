@@ -18,6 +18,14 @@ func amountString(a num.Amount) string {
 	return a.RescaleDown(2).MinimalString()
 }
 
+// amountTwoDecimalString renders an amount with exactly two decimals, as
+// required by Facturae XSD fields typed DoubleTwoDecimalType (pattern
+// -?[0-9]+\.[0-9]{2}), e.g. InstallmentAmount. Values are rounded down from
+// higher precision and padded up from lower precision.
+func amountTwoDecimalString(a num.Amount) string {
+	return a.Rescale(2).String()
+}
+
 // makeAmount always provides an AmountType, capped at two decimals.
 func makeAmount(a num.Amount) Amount {
 	return Amount{
