@@ -4,7 +4,7 @@
 		"uuid": "7b2a6f80-7483-11ec-9722-7ea2cb436ff6",
 		"dig": {
 			"alg": "sha256",
-			"val": "7b2a6f80748311ec97227ea2cb436ff67b2a6f80748311ec97227ea2cb436ff6"
+			"val": "7e79c4f6de0dfbed0c1db37ab18a5ea5c47dbe0987e40cd6b6e62659324c7e1b"
 		}
 	},
 	"doc": {
@@ -26,7 +26,6 @@
 		},
 		"supplier": {
 			"name": "Hypeprop Sl",
-			"alias": "Hypeprop",
 			"tax_id": {
 				"country": "ES",
 				"code": "B23103039"
@@ -97,26 +96,7 @@
 					"description": "Initial deposit",
 					"amount": "1000.00"
 				}
-			],
-			"terms": {
-				"key": "due-date",
-				"due_dates": [
-					{
-						"date": "2021-12-30",
-						"amount": "3840.00",
-						"percent": "100%"
-					}
-				]
-			},
-			"instructions": {
-				"key": "credit-transfer",
-				"credit_transfer": [
-					{
-						"iban": "ES25 0188 2570 7185 4470 4761",
-						"name": "Bankrandom"
-					}
-				]
-			}
+			]
 		},
 		"totals": {
 			"sum": "4000.00",

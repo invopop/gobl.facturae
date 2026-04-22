@@ -50,11 +50,15 @@ type Batch struct {
 }
 
 func newFileHeader(invoice *bill.Invoice, tp *ThirdParty) *FileHeader {
+	// Match InvoiceTotals: once advances are present, totals.Due is the
+	// amount that still needs executing. Using Payable here would make the
+	// Batch aggregates disagree with the per-invoice TotalOutstandingAmount.
 	outstanding := invoice.Totals.Payable
-	// Outlays not currently supported...
-	//if invoice.Totals.Outlays != nil {
-	//	outstanding = outstanding.Subtract(*invoice.Totals.Outlays)
-	//}
+	executable := invoice.Totals.Payable
+	if invoice.Totals.Due != nil {
+		outstanding = *invoice.Totals.Due
+		executable = *invoice.Totals.Due
+	}
 	ii := InvoiceIssuerSeller
 	if tp != nil {
 		ii = InvoiceIssuerThirdParty
@@ -69,7 +73,7 @@ func newFileHeader(invoice *bill.Invoice, tp *ThirdParty) *FileHeader {
 			InvoicesCount:          1,
 			TotalInvoicesAmount:    makeAmount(invoice.Totals.TotalWithTax),
 			TotalOutstandingAmount: makeAmount(outstanding),
-			TotalExecutableAmount:  makeAmount(invoice.Totals.Payable),
+			TotalExecutableAmount:  makeAmount(executable),
 			InvoiceCurrencyCode:    string(invoice.Currency),
 		},
 	}
