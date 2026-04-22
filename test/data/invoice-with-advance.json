@@ -1,0 +1,148 @@
+{
+	"$schema": "https://gobl.org/draft-0/envelope",
+	"head": {
+		"uuid": "7b2a6f80-7483-11ec-9722-7ea2cb436ff6",
+		"dig": {
+			"alg": "sha256",
+			"val": "7b2a6f80748311ec97227ea2cb436ff67b2a6f80748311ec97227ea2cb436ff6"
+		}
+	},
+	"doc": {
+		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"$regime": "ES",
+		"$addons": [
+			"es-facturae-v3"
+		],
+		"uuid": "019c4e4d-1234-72e6-9579-55f09974a200",
+		"type": "standard",
+		"code": "TEST01001A",
+		"issue_date": "2021-12-08",
+		"currency": "EUR",
+		"tax": {
+			"ext": {
+				"es-facturae-doc-type": "FC",
+				"es-facturae-invoice-class": "OO"
+			}
+		},
+		"supplier": {
+			"name": "Hypeprop Sl",
+			"alias": "Hypeprop",
+			"tax_id": {
+				"country": "ES",
+				"code": "B23103039"
+			},
+			"addresses": [
+				{
+					"num": "74",
+					"street": "Campo Real",
+					"locality": "Torrejón De La Calzada",
+					"region": "Madrid",
+					"code": "28023",
+					"country": "ES"
+				}
+			],
+			"emails": [
+				{
+					"addr": "rxazy27xfc@iname.com"
+				}
+			]
+		},
+		"customer": {
+			"name": "Moniward Sl",
+			"tax_id": {
+				"country": "ES",
+				"code": "B77436020"
+			},
+			"addresses": [
+				{
+					"num": "35",
+					"street": "Plaza Horno",
+					"locality": "Nombela",
+					"region": "Toledo",
+					"code": "45083",
+					"country": "ES"
+				}
+			],
+			"emails": [
+				{
+					"addr": "bfn25xf3p@lycos.co.uk"
+				}
+			]
+		},
+		"lines": [
+			{
+				"i": 1,
+				"quantity": "20",
+				"item": {
+					"name": "Operations and development - day rate",
+					"price": "200.00"
+				},
+				"sum": "4000.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"key": "standard",
+						"rate": "general",
+						"percent": "21.0%"
+					}
+				],
+				"total": "4000.00"
+			}
+		],
+		"payment": {
+			"advances": [
+				{
+					"date": "2021-11-01",
+					"key": "credit-transfer",
+					"description": "Initial deposit",
+					"amount": "1000.00"
+				}
+			],
+			"terms": {
+				"key": "due-date",
+				"due_dates": [
+					{
+						"date": "2021-12-30",
+						"amount": "3840.00",
+						"percent": "100%"
+					}
+				]
+			},
+			"instructions": {
+				"key": "credit-transfer",
+				"credit_transfer": [
+					{
+						"iban": "ES25 0188 2570 7185 4470 4761",
+						"name": "Bankrandom"
+					}
+				]
+			}
+		},
+		"totals": {
+			"sum": "4000.00",
+			"total": "4000.00",
+			"taxes": {
+				"categories": [
+					{
+						"code": "VAT",
+						"rates": [
+							{
+								"key": "standard",
+								"base": "4000.00",
+								"percent": "21.0%",
+								"amount": "840.00"
+							}
+						],
+						"amount": "840.00"
+					}
+				],
+				"sum": "840.00"
+			},
+			"tax": "840.00",
+			"total_with_tax": "4840.00",
+			"payable": "4840.00",
+			"advance": "1000.00",
+			"due": "3840.00"
+		}
+	}
+}
