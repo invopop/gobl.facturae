@@ -34,7 +34,7 @@ func newDiscounts(discounts []*bill.Discount) *Discounts {
 func newDiscount(discount *bill.Discount) *Discount {
 	nd := &Discount{
 		Reason: discount.Reason,
-		Amount: discount.Amount.String(),
+		Amount: amount(discount.Amount),
 	}
 	if discount.Percent != nil {
 		nd.Rate = discount.Percent.StringWithoutSymbol()
@@ -60,11 +60,11 @@ func newLineDiscount(ld *bill.LineDiscount) *Discount {
 		return &Discount{
 			Reason: ld.Reason,
 			Rate:   ld.Percent.StringWithoutSymbol(),
-			Amount: ld.Amount.String(),
+			Amount: amount(ld.Amount),
 		}
 	}
 	return &Discount{
 		Reason: ld.Reason,
-		Amount: ld.Amount.String(),
+		Amount: amount(ld.Amount),
 	}
 }

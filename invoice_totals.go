@@ -87,23 +87,23 @@ func newInvoiceTotals(invoice *bill.Invoice) *InvoiceTotals {
 	*/
 
 	xmlTotals := &InvoiceTotals{
-		TotalGrossAmount:            sum.String(),
+		TotalGrossAmount:            amount(sum),
 		GeneralDiscounts:            newDiscounts(invoice.Discounts),
 		GeneralSurcharges:           newCharges(invoice.Charges),
-		TotalGrossAmountBeforeTaxes: totals.Total.String(),
-		InvoiceTotal:                totals.TotalWithTax.String(),
-		TotalOutstandingAmount:      outstanding.String(),
-		TotalExecutableAmount:       due.String(),
+		TotalGrossAmountBeforeTaxes: amount(totals.Total),
+		InvoiceTotal:                amount(totals.TotalWithTax),
+		TotalOutstandingAmount:      amount(outstanding),
+		TotalExecutableAmount:       amount(due),
 	}
 
 	if totals.Discount != nil {
-		xmlTotals.TotalGeneralDiscounts = totals.Discount.String()
+		xmlTotals.TotalGeneralDiscounts = amount(*totals.Discount)
 	}
 	if totals.Charge != nil {
-		xmlTotals.TotalGeneralSurcharges = totals.Charge.String()
+		xmlTotals.TotalGeneralSurcharges = amount(*totals.Charge)
 	}
 	if totals.Advances != nil {
-		xmlTotals.TotalPaymentsOnAccount = totals.Advances.String()
+		xmlTotals.TotalPaymentsOnAccount = amount(*totals.Advances)
 	}
 	/*
 		if totals.Outlays != nil {
@@ -133,8 +133,8 @@ func (it *InvoiceTotals) setTaxTotals(taxes *tax.Total) {
 			}
 		}
 	}
-	it.TotalTaxOutputs = regular.String()
-	it.TotalTaxesWithheld = retained.String()
+	it.TotalTaxOutputs = amount(regular)
+	it.TotalTaxesWithheld = amount(retained)
 }
 
 func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
@@ -144,7 +144,7 @@ func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
 		if a.Grant {
 			g := &Subsidy{
 				SubsidyDescription: a.Description,
-				SubsidyAmount:      a.Amount.String(),
+				SubsidyAmount:      amount(a.Amount),
 			}
 			if a.Percent != nil {
 				g.SubsidyRate = a.Percent.String()
@@ -152,7 +152,7 @@ func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
 			grants = append(grants, g)
 		} else {
 			na := &PaymentOnAccount{
-				PaymentOnAccountAmount: a.Amount.String(),
+				PaymentOnAccountAmount: amount(a.Amount),
 			}
 			if a.Date != nil {
 				na.PaymentOnAccountDate = *a.Date

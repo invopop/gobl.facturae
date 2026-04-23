@@ -101,7 +101,7 @@
 					<TaxTypeCode>01</TaxTypeCode>
 					<TaxRate>21.0</TaxRate>
 					<TaxableBase>
-						<TotalAmount>4002</TotalAmount>
+						<TotalAmount>4002.00</TotalAmount>
 					</TaxableBase>
 					<TaxAmount>
 						<TotalAmount>840.42</TotalAmount>
@@ -111,10 +111,10 @@
 					<TaxTypeCode>01</TaxTypeCode>
 					<TaxRate>10.0</TaxRate>
 					<TaxableBase>
-						<TotalAmount>35</TotalAmount>
+						<TotalAmount>35.00</TotalAmount>
 					</TaxableBase>
 					<TaxAmount>
-						<TotalAmount>3.5</TotalAmount>
+						<TotalAmount>3.50</TotalAmount>
 					</TaxAmount>
 				</Tax>
 			</TaxesOutputs>
@@ -123,10 +123,10 @@
 					<TaxTypeCode>04</TaxTypeCode>
 					<TaxRate>15.0</TaxRate>
 					<TaxableBase>
-						<TotalAmount>4002</TotalAmount>
+						<TotalAmount>4002.00</TotalAmount>
 					</TaxableBase>
 					<TaxAmount>
-						<TotalAmount>600.3</TotalAmount>
+						<TotalAmount>600.30</TotalAmount>
 					</TaxAmount>
 				</Tax>
 			</TaxesWithheld>
@@ -151,7 +151,7 @@
 					<ItemDescription>Operations and development - day rate</ItemDescription>
 					<Quantity>20</Quantity>
 					<UnitPriceWithoutTax>200</UnitPriceWithoutTax>
-					<TotalCost>4000</TotalCost>
+					<TotalCost>4000.00</TotalCost>
 					<DiscountsAndRebates>
 						<Discount>
 							<DiscountReason>just because</DiscountReason>
@@ -159,16 +159,16 @@
 							<DiscountAmount>200.00</DiscountAmount>
 						</Discount>
 					</DiscountsAndRebates>
-					<GrossAmount>3800</GrossAmount>
+					<GrossAmount>3800.00</GrossAmount>
 					<TaxesWithheld>
 						<Tax>
 							<TaxTypeCode>04</TaxTypeCode>
 							<TaxRate>15.0</TaxRate>
 							<TaxableBase>
-								<TotalAmount>3800</TotalAmount>
+								<TotalAmount>3800.00</TotalAmount>
 							</TaxableBase>
 							<TaxAmount>
-								<TotalAmount>570</TotalAmount>
+								<TotalAmount>570.00</TotalAmount>
 							</TaxAmount>
 						</Tax>
 					</TaxesWithheld>
@@ -177,10 +177,10 @@
 							<TaxTypeCode>01</TaxTypeCode>
 							<TaxRate>21.0</TaxRate>
 							<TaxableBase>
-								<TotalAmount>3800</TotalAmount>
+								<TotalAmount>3800.00</TotalAmount>
 							</TaxableBase>
 							<TaxAmount>
-								<TotalAmount>798</TotalAmount>
+								<TotalAmount>798.00</TotalAmount>
 							</TaxAmount>
 						</Tax>
 					</TaxesOutputs>
@@ -189,17 +189,17 @@
 					<ItemDescription>Additional Overtime</ItemDescription>
 					<Quantity>2</Quantity>
 					<UnitPriceWithoutTax>101</UnitPriceWithoutTax>
-					<TotalCost>202</TotalCost>
-					<GrossAmount>202</GrossAmount>
+					<TotalCost>202.00</TotalCost>
+					<GrossAmount>202.00</GrossAmount>
 					<TaxesWithheld>
 						<Tax>
 							<TaxTypeCode>04</TaxTypeCode>
 							<TaxRate>15.0</TaxRate>
 							<TaxableBase>
-								<TotalAmount>202</TotalAmount>
+								<TotalAmount>202.00</TotalAmount>
 							</TaxableBase>
 							<TaxAmount>
-								<TotalAmount>30.3</TotalAmount>
+								<TotalAmount>30.30</TotalAmount>
 							</TaxAmount>
 						</Tax>
 					</TaxesWithheld>
@@ -208,7 +208,7 @@
 							<TaxTypeCode>01</TaxTypeCode>
 							<TaxRate>21.0</TaxRate>
 							<TaxableBase>
-								<TotalAmount>202</TotalAmount>
+								<TotalAmount>202.00</TotalAmount>
 							</TaxableBase>
 							<TaxAmount>
 								<TotalAmount>42.42</TotalAmount>
@@ -220,17 +220,17 @@
 					<ItemDescription>Extra food costs</ItemDescription>
 					<Quantity>1</Quantity>
 					<UnitPriceWithoutTax>35</UnitPriceWithoutTax>
-					<TotalCost>35</TotalCost>
-					<GrossAmount>35</GrossAmount>
+					<TotalCost>35.00</TotalCost>
+					<GrossAmount>35.00</GrossAmount>
 					<TaxesOutputs>
 						<Tax>
 							<TaxTypeCode>01</TaxTypeCode>
 							<TaxRate>10.0</TaxRate>
 							<TaxableBase>
-								<TotalAmount>35</TotalAmount>
+								<TotalAmount>35.00</TotalAmount>
 							</TaxableBase>
 							<TaxAmount>
-								<TotalAmount>3.5</TotalAmount>
+								<TotalAmount>3.50</TotalAmount>
 							</TaxAmount>
 						</Tax>
 					</TaxesOutputs>
@@ -247,7 +247,7 @@
 					<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 				</ds:Transforms>
 				<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></ds:DigestMethod>
-				<ds:DigestValue>Md2uUh+r3P6QUytHouwFdLTqXxtXXXfEAzL2KvSv3nIfqkQyt2Vpk0uO3lKUo8DrqKnS7IKFJLSAz0FFSfT5qg==</ds:DigestValue>
+				<ds:DigestValue>eoWXzv9iItVgKnCIzFYJ0TOgLAe/o09H5izSqZmumPebpaPxEDskZtNRDFWyBpaMVIfBoOoyYE8b/NDhQp72iQ==</ds:DigestValue>
 			</ds:Reference>
 			<ds:Reference URI="#Certificate-679f2f25-7483-11ec-9722-7ea2cb436ff6">
 				<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></ds:DigestMethod>
@@ -261,7 +261,7 @@
 				<ds:DigestValue>7JJy4akxa8EA0VaYKrzrTRE0QG/MPxW0cHZFnziNTdU7YvpBuS8nn5dMWU2tmnogdoNBJKlKwFu91ganWKxiWQ==</ds:DigestValue>
 			</ds:Reference>
 		</ds:SignedInfo>
-		<ds:SignatureValue Id="Signature-679f2f25-7483-11ec-9722-7ea2cb436ff6-SignatureValue">JHCzOuMZ74Ufe1/Ue6GmzQKqbq4kNqZl2a+OyrvQQo3YKIShNN1LKf3TsXq8h14o8B/pTZPs5UMKMVbs25Pb6H7dr87rluw22yyLgjzckNHBgE9rMRDT4/QSSU3TCknVNCCgq2qV+M9rRGO3i1o7UzG0hQWTYNwKXfDQPccvIAgBMK5AW7x00YZCj/Ve4p7dYsV5HQ6ClLCVTZlLiDKBmoRGEqRZftv3NLRhlzbo5SExg4VgrXVUKNWBg+fqLd3I0Y8I4m1tOK080i9eW/EpxYM2B83UqoaE5Rl0FaZROzjVLMM8OGHJdBYai3HQsgE6cYlIfjoF36lsM64TceB40A==</ds:SignatureValue>
+		<ds:SignatureValue Id="Signature-679f2f25-7483-11ec-9722-7ea2cb436ff6-SignatureValue">DHdzvqRc+lSYZixt6ERwTk46pLdnHCnq4lLQdKAlM1X0TxSlNCgdAOfw/ePzZH2RS4qQED/7y5zNu/SeUChQojTLlCrw3mCnMl4qXcCReR+oG8YiMOTh0c39WIzUZRdeM1cE8nVb1MmgPCNHPm0CwCRj/ctiFg0BA9b9NCduK85aUsX0bnWbcB0lolb69hEwmTo8+900ID2C1dhJ5hq6odmWQ8YHQK6qpmQAxUsmdVDEgumSFil89XObiIZshoc949WFJ/HODBGN2kewJg641IyN8K4CxYwujrzYGNHHxc/iakivK9QPXn0oNROOCCmtTfIigRpzuj/0PprqJTYtBA==</ds:SignatureValue>
 		<ds:KeyInfo Id="Certificate-679f2f25-7483-11ec-9722-7ea2cb436ff6">
 			<ds:X509Data>
 				<ds:X509Certificate>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</ds:X509Certificate>

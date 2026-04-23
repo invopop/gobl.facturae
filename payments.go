@@ -60,7 +60,7 @@ func newPaymentDetails(paymentInfo *bill.PaymentDetails, totals *bill.Totals) *P
 	for i, installment := range terms.DueDates {
 		xmlInstallment := &Installment{
 			InstallmentDueDate:              installment.Date.String(),
-			InstallmentAmount:               installmentAmount(installment.Amount, totals).String(),
+			InstallmentAmount:               amount(installmentAmount(installment.Amount, totals)),
 			PaymentMeans:                    facturaePaymentMethodCodes[instructions.Key],
 			CollectionAdditionalInformation: mergeNotes(paymentInfo.Terms.Notes, installment.Notes),
 		}
@@ -123,9 +123,9 @@ func newDebitBankAccount(info *pay.DirectDebit) *BankAccount {
 // proportionally.
 func installmentAmount(raw num.Amount, totals *bill.Totals) num.Amount {
 	if totals == nil || totals.Due == nil || totals.Payable.IsZero() {
-		return raw.Rescale(2)
+		return raw
 	}
-	return raw.Multiply(*totals.Due).Divide(totals.Payable).Rescale(2)
+	return raw.Multiply(*totals.Due).Divide(totals.Payable)
 }
 
 func mergeNotes(termNotes string, installmentNotes string) string {
