@@ -35,7 +35,7 @@ func newCharges(charges []*bill.Charge) *Charges {
 func newCharge(charge *bill.Charge) *Charge {
 	nc := &Charge{
 		Reason: charge.Reason,
-		Amount: charge.Amount.String(),
+		Amount: amount(charge.Amount),
 	}
 	if charge.Percent != nil {
 		nc.Rate = charge.Percent.StringWithoutSymbol()
@@ -59,7 +59,7 @@ func newLineCharges(lds []*bill.LineCharge) *Charges {
 func newLineCharge(lc *bill.LineCharge) *Charge {
 	nc := &Charge{
 		Reason: lc.Reason,
-		Amount: lc.Amount.String(),
+		Amount: amount(lc.Amount),
 	}
 	if lc.Percent != nil {
 		nc.Rate = lc.Percent.StringWithoutSymbol()
