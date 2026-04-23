@@ -26,4 +26,18 @@ func TestPaymentsInfo(t *testing.T) {
 		assert.Equal(t, "ES25 0188 2570 7185 4470 4761", pi.AccountToBeCredited.IBAN)
 		assert.Contains(t, pi.CollectionAdditionalInformation, "payment term note")
 	})
+
+	t.Run("should render InstallmentAmount net of advances", func(t *testing.T) {
+		// invoice-with-advance: 4,840 EUR invoice, 1,000 EUR non-grant
+		// advance, one installment. GOBL's due_date records the full
+		// 4,840 (gross); Facturae's InstallmentAmount must be the
+		// 3,840 outstanding after the advance.
+		doc, err := test.LoadGOBL("invoice-with-advance.json")
+		require.NoError(t, err)
+
+		pd := doc.Invoices.List[0].PaymentDetails
+		require.NotNil(t, pd)
+		require.Len(t, pd.Installments, 1)
+		assert.Equal(t, "3840.00", pd.Installments[0].InstallmentAmount)
+	})
 }

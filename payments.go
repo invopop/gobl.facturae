@@ -113,8 +113,14 @@ func newDebitBankAccount(info *pay.DirectDebit) *BankAccount {
 	}
 }
 
-// installmentAmount returns raw net of advances, rounded to two decimals.
-// GOBL's due_dates are gross of advances; Facturae's InstallmentAmount is net.
+// installmentAmount translates a GOBL due_date amount (gross of advances)
+// into the Facturae InstallmentAmount (net of advances) — the "importe a
+// satisfacer en cada plazo" the payer actually transfers on that date.
+//
+// Example: invoice 4,840 EUR, 1,000 EUR advance already paid, one installment
+// of 4,840 in GOBL. The scaling 4,840 × (3,840/4,840) yields 3,840 — what
+// still needs to be transferred. Multi-installment schedules are scaled
+// proportionally.
 func installmentAmount(raw num.Amount, totals *bill.Totals) num.Amount {
 	if totals == nil || totals.Due == nil || totals.Payable.IsZero() {
 		return raw.Rescale(2)
