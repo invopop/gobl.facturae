@@ -119,11 +119,13 @@ func newDebitBankAccount(info *pay.DirectDebit) *BankAccount {
 // payer still has to transfer on that date. When advances are present
 // (totals.Due is set), scale each installment by Due/Payable so the sum
 // of InstallmentAmount values matches the invoice's outstanding amount.
+// The returned value is rounded to two decimal places to satisfy
+// Facturae's DoubleTwoDecimalType.
 func installmentAmount(raw num.Amount, totals *bill.Totals) num.Amount {
 	if totals == nil || totals.Due == nil || totals.Payable.IsZero() {
-		return raw
+		return raw.Round(2)
 	}
-	return raw.Multiply(*totals.Due).Divide(totals.Payable)
+	return raw.Multiply(*totals.Due).Divide(totals.Payable).Round(2)
 }
 
 func mergeNotes(termNotes string, installmentNotes string) string {
