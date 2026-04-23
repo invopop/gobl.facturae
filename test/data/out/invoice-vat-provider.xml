@@ -25,13 +25,13 @@
 			<BatchIdentifier>B23103039-TEST01001F</BatchIdentifier>
 			<InvoicesCount>1</InvoicesCount>
 			<TotalInvoicesAmount>
-				<TotalAmount>2019.2</TotalAmount>
+				<TotalAmount>2019.20</TotalAmount>
 			</TotalInvoicesAmount>
 			<TotalOutstandingAmount>
-				<TotalAmount>2019.2</TotalAmount>
+				<TotalAmount>2019.20</TotalAmount>
 			</TotalOutstandingAmount>
 			<TotalExecutableAmount>
-				<TotalAmount>2019.2</TotalAmount>
+				<TotalAmount>2019.20</TotalAmount>
 			</TotalExecutableAmount>
 			<InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
 		</Batch>
@@ -99,46 +99,46 @@
 					<TaxTypeCode>01</TaxTypeCode>
 					<TaxRate>21.0</TaxRate>
 					<TaxableBase>
-						<TotalAmount>1600</TotalAmount>
+						<TotalAmount>1600.00</TotalAmount>
 					</TaxableBase>
 					<TaxAmount>
-						<TotalAmount>336</TotalAmount>
+						<TotalAmount>336.00</TotalAmount>
 					</TaxAmount>
 					<EquivalenceSurcharge>5.20</EquivalenceSurcharge>
 					<EquivalenceSurchargeAmount>
-						<TotalAmount>83.2</TotalAmount>
+						<TotalAmount>83.20</TotalAmount>
 					</EquivalenceSurchargeAmount>
 				</Tax>
 			</TaxesOutputs>
 			<InvoiceTotals>
-				<TotalGrossAmount>1600</TotalGrossAmount>
-				<TotalGrossAmountBeforeTaxes>1600</TotalGrossAmountBeforeTaxes>
-				<TotalTaxOutputs>419.2</TotalTaxOutputs>
-				<TotalTaxesWithheld>0</TotalTaxesWithheld>
-				<InvoiceTotal>2019.2</InvoiceTotal>
-				<TotalOutstandingAmount>2019.2</TotalOutstandingAmount>
-				<TotalExecutableAmount>2019.2</TotalExecutableAmount>
+				<TotalGrossAmount>1600.00</TotalGrossAmount>
+				<TotalGrossAmountBeforeTaxes>1600.00</TotalGrossAmountBeforeTaxes>
+				<TotalTaxOutputs>419.20</TotalTaxOutputs>
+				<TotalTaxesWithheld>0.00</TotalTaxesWithheld>
+				<InvoiceTotal>2019.20</InvoiceTotal>
+				<TotalOutstandingAmount>2019.20</TotalOutstandingAmount>
+				<TotalExecutableAmount>2019.20</TotalExecutableAmount>
 			</InvoiceTotals>
 			<Items>
 				<InvoiceLine>
 					<ItemDescription>Delivery</ItemDescription>
 					<Quantity>20</Quantity>
 					<UnitPriceWithoutTax>50</UnitPriceWithoutTax>
-					<TotalCost>1000</TotalCost>
-					<GrossAmount>1000</GrossAmount>
+					<TotalCost>1000.00</TotalCost>
+					<GrossAmount>1000.00</GrossAmount>
 					<TaxesOutputs>
 						<Tax>
 							<TaxTypeCode>01</TaxTypeCode>
 							<TaxRate>21.0</TaxRate>
 							<TaxableBase>
-								<TotalAmount>1000</TotalAmount>
+								<TotalAmount>1000.00</TotalAmount>
 							</TaxableBase>
 							<TaxAmount>
-								<TotalAmount>210</TotalAmount>
+								<TotalAmount>210.00</TotalAmount>
 							</TaxAmount>
 							<EquivalenceSurcharge>5.20</EquivalenceSurcharge>
 							<EquivalenceSurchargeAmount>
-								<TotalAmount>52</TotalAmount>
+								<TotalAmount>52.00</TotalAmount>
 							</EquivalenceSurchargeAmount>
 						</Tax>
 					</TaxesOutputs>
@@ -147,21 +147,21 @@
 					<ItemDescription>Branded Mug</ItemDescription>
 					<Quantity>50</Quantity>
 					<UnitPriceWithoutTax>12</UnitPriceWithoutTax>
-					<TotalCost>600</TotalCost>
-					<GrossAmount>600</GrossAmount>
+					<TotalCost>600.00</TotalCost>
+					<GrossAmount>600.00</GrossAmount>
 					<TaxesOutputs>
 						<Tax>
 							<TaxTypeCode>01</TaxTypeCode>
 							<TaxRate>21.0</TaxRate>
 							<TaxableBase>
-								<TotalAmount>600</TotalAmount>
+								<TotalAmount>600.00</TotalAmount>
 							</TaxableBase>
 							<TaxAmount>
-								<TotalAmount>126</TotalAmount>
+								<TotalAmount>126.00</TotalAmount>
 							</TaxAmount>
 							<EquivalenceSurcharge>5.20</EquivalenceSurcharge>
 							<EquivalenceSurchargeAmount>
-								<TotalAmount>31.2</TotalAmount>
+								<TotalAmount>31.20</TotalAmount>
 							</EquivalenceSurchargeAmount>
 						</Tax>
 					</TaxesOutputs>
@@ -192,7 +192,7 @@
 					<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 				</ds:Transforms>
 				<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></ds:DigestMethod>
-				<ds:DigestValue>uMOiBPhoqHD4HVhmPJwk9Y2pjaOAsTwCdkqHA4hmXADz8uhwti2Nh9Ac1Bfrlt6+uk2Z8C8USctHcDvOqqqSuQ==</ds:DigestValue>
+				<ds:DigestValue>C8A/huuzkpxlEu7yWFk3ms6wbP4hqgBmBb3qLFFlNkY3dmobUWneM6i8hzG9/ghMMe3C4fxzFrjq04GRf+S++Q==</ds:DigestValue>
 			</ds:Reference>
 			<ds:Reference URI="#Certificate-679f2f25-7483-11ec-9722-7ea2cb436ff6">
 				<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></ds:DigestMethod>
@@ -206,7 +206,7 @@
 				<ds:DigestValue>7JJy4akxa8EA0VaYKrzrTRE0QG/MPxW0cHZFnziNTdU7YvpBuS8nn5dMWU2tmnogdoNBJKlKwFu91ganWKxiWQ==</ds:DigestValue>
 			</ds:Reference>
 		</ds:SignedInfo>
-		<ds:SignatureValue Id="Signature-679f2f25-7483-11ec-9722-7ea2cb436ff6-SignatureValue">eAAQLoADOEqDCl4uw1Q2bJwnr1jzEnHCkhj9Sj0RpSdJhMxWKChb4NOtK6bCogQHZ3NNPUPNvVksCIXw+ICtpkww6M0Zg5tkZMXNNbofEU3M+QDzN+zERM03Nw2GggC3cAIgBcf9+b1eMuN8M1f9dxDw4Wtw1iOBFRP/wC635iyOu4xoEgoUIDpojhWAdBWhPC5B+giyeZDParA6y7NW/SlKPYbn7LDtVTAYE9Gb9qFEuxckm8j8Ux8ijrMS3Ng6pt1OQAZVg+f9o+tTx/8jU00scGS8Gtd9FAcvscxG2Sqfk8UQy4JLdrnxYudP2CQ40W7o10ZrwFa1oi79Yg0Rng==</ds:SignatureValue>
+		<ds:SignatureValue Id="Signature-679f2f25-7483-11ec-9722-7ea2cb436ff6-SignatureValue">Qvv3Ppj3CeirId/5H46aImQrvexsRazlzioLl1Y3Je99ySI0k7arr+bik35QXD0oxUXt56TmvLCpVM5GJPgP8igw23dPSsAtaNavQKH/pp2AjLor9EYALIKkPqmJoixvggz1qwNdxj8yPL9xBSGHtrINv7nCtBrk+OJ8Y5SCw4jcW6abSV2NpFSGLDB0juChHNCNdR7Wy87/XUD+/ni4THpx6MKnNlEw2r3KZm278M18+28pgR94epzD2GuugRhOGaxn6GuBi7y2KUJlqO8hkNza/macdtNAuSSndlqTYVIojy8vMUyyrQV0wjWV4FWlce79BDmipQAADY7kB9hyBw==</ds:SignatureValue>
 		<ds:KeyInfo Id="Certificate-679f2f25-7483-11ec-9722-7ea2cb436ff6">
 			<ds:X509Data>
 				<ds:X509Certificate>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</ds:X509Certificate>

@@ -59,7 +59,7 @@ func newPaymentDetails(paymentInfo *bill.PaymentDetails) *PaymentDetails {
 	for i, installment := range terms.DueDates {
 		xmlInstallment := &Installment{
 			InstallmentDueDate:              installment.Date.String(),
-			InstallmentAmount:               amountTwoDecimalString(installment.Amount),
+			InstallmentAmount:               amount(installment.Amount),
 			PaymentMeans:                    facturaePaymentMethodCodes[instructions.Key],
 			CollectionAdditionalInformation: mergeNotes(paymentInfo.Terms.Notes, installment.Notes),
 		}

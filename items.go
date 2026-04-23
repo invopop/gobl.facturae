@@ -69,10 +69,10 @@ func newInvoiceLine(line *bill.Line, taxes *tax.Total) *InvoiceLine {
 		ItemDescription:     line.Item.Name,
 		Quantity:            line.Quantity.String(),
 		UnitPriceWithoutTax: line.Item.Price.MinimalString(),
-		TotalCost:           amountString(*line.Sum),
+		TotalCost:           amount(*line.Sum),
 		DiscountsAndRebates: newLineDiscounts(line.Discounts),
 		Charges:             newLineCharges(line.Charges),
-		GrossAmount:         amountString(*line.Total),
+		GrossAmount:         amount(*line.Total),
 	}
 	xmlLine.addTaxes(*line.Total, taxes, line.Taxes)
 
