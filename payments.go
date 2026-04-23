@@ -113,19 +113,13 @@ func newDebitBankAccount(info *pay.DirectDebit) *BankAccount {
 	}
 }
 
-// installmentAmount returns the amount actually due on an installment date.
-// GOBL's due_dates always sum to totals.Payable (gross of advances), but
-// Facturae's InstallmentAmount is the "importe a satisfacer" — what the
-// payer still has to transfer on that date. When advances are present
-// (totals.Due is set), scale each installment by Due/Payable so the sum
-// of InstallmentAmount values matches the invoice's outstanding amount.
-// The returned value is rounded to two decimal places to satisfy
-// Facturae's DoubleTwoDecimalType.
+// installmentAmount returns raw net of advances, rounded to two decimals.
+// GOBL's due_dates are gross of advances; Facturae's InstallmentAmount is net.
 func installmentAmount(raw num.Amount, totals *bill.Totals) num.Amount {
 	if totals == nil || totals.Due == nil || totals.Payable.IsZero() {
-		return raw.Round(2)
+		return raw.Rescale(2)
 	}
-	return raw.Multiply(*totals.Due).Divide(totals.Payable).Round(2)
+	return raw.Multiply(*totals.Due).Divide(totals.Payable).Rescale(2)
 }
 
 func mergeNotes(termNotes string, installmentNotes string) string {
