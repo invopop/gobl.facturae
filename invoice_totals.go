@@ -112,7 +112,7 @@ func newInvoiceTotals(invoice *bill.Invoice) *InvoiceTotals {
 	*/
 
 	if invoice.Payment != nil {
-		xmlTotals.setAdvances(invoice.Payment.Advances)
+		xmlTotals.setAdvances(invoice.Payment.Advances, invoice.IssueDate)
 	}
 	// xmlTotals.setOutlays(invoice.Outlays)
 	xmlTotals.setTaxTotals(totals.Taxes)
@@ -137,7 +137,10 @@ func (it *InvoiceTotals) setTaxTotals(taxes *tax.Total) {
 	it.TotalTaxesWithheld = amount(retained)
 }
 
-func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
+// setAdvances populates PaymentsOnAccount and Subsidies from the invoice's
+// advances. fallbackDate (the invoice's IssueDate) is used when a non-grant
+// advance has no date set.
+func (it *InvoiceTotals) setAdvances(advances []*pay.Advance, fallbackDate cal.Date) {
 	regular := make([]*PaymentOnAccount, 0)
 	grants := make([]*Subsidy, 0)
 	for _, a := range advances {
@@ -153,6 +156,7 @@ func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
 		} else {
 			na := &PaymentOnAccount{
 				PaymentOnAccountAmount: amount(a.Amount),
+				PaymentOnAccountDate:   fallbackDate,
 			}
 			if a.Date != nil {
 				na.PaymentOnAccountDate = *a.Date
