@@ -153,8 +153,8 @@ func newInvoiceHeader(inv *bill.Invoice) *InvoiceHeader {
 	}
 
 	if inv.Tax != nil {
-		h.InvoiceDocumentType = inv.Tax.Ext[facturae.ExtKeyDocType].String()
-		h.InvoiceClass = inv.Tax.Ext[facturae.ExtKeyInvoiceClass].String()
+		h.InvoiceDocumentType = inv.Tax.Ext.Get(facturae.ExtKeyDocType).String()
+		h.InvoiceClass = inv.Tax.Ext.Get(facturae.ExtKeyInvoiceClass).String()
 	}
 
 	// Only one preceding document currently supported
