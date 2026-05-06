@@ -90,7 +90,7 @@ func newCorrective(inv *bill.Invoice) *Corrective {
 
 	// determine the reason from the extension
 	kd := tax.ExtensionForKey(facturae.ExtKeyCorrection)
-	cc := p.Ext[facturae.ExtKeyCorrection]
+	cc := p.Ext.Get(facturae.ExtKeyCorrection)
 	if row := kd.CodeDef(cc); row != nil {
 		c.ReasonCode = row.Code.String()
 		c.ReasonDescription = row.Name.In(i18n.ES)
