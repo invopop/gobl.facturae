@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.3
 
 require (
-	github.com/invopop/gobl v0.402.0
+	github.com/invopop/gobl v0.403.0
 	github.com/invopop/xmldsig v0.14.0
 	github.com/lestrrat-go/libxml2 v0.0.0-20240905100032-c934e3fcb9d3
 	github.com/magefile/mage v1.15.0

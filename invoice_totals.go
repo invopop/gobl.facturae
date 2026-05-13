@@ -1,6 +1,7 @@
 package facturae
 
 import (
+	"github.com/invopop/gobl/addons/es/facturae"
 	"github.com/invopop/gobl/bill"
 	"github.com/invopop/gobl/cal"
 	"github.com/invopop/gobl/num"
@@ -137,11 +138,11 @@ func (it *InvoiceTotals) setTaxTotals(taxes *tax.Total) {
 	it.TotalTaxesWithheld = amount(retained)
 }
 
-func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
+func (it *InvoiceTotals) setAdvances(advances []*pay.Record) {
 	regular := make([]*PaymentOnAccount, 0)
 	grants := make([]*Subsidy, 0)
 	for _, a := range advances {
-		if a.Grant {
+		if a.Ext.Get(facturae.ExtKeySubsidy) == "S" {
 			g := &Subsidy{
 				SubsidyDescription: a.Description,
 				SubsidyAmount:      amount(a.Amount),
@@ -157,6 +158,7 @@ func (it *InvoiceTotals) setAdvances(advances []*pay.Advance) {
 			if a.Date != nil {
 				na.PaymentOnAccountDate = *a.Date
 			}
+			regular = append(regular, na)
 		}
 	}
 	if len(regular) > 0 {
